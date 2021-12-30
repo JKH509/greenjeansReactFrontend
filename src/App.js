@@ -1,57 +1,57 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import AdminAddCustomerPage from './pages/admin/customer_data/AdminAddCustomerPage';
+import AdminCustomerInvoicePage from './pages/admin/customer_data/AdminCustomerInvoicePage';
+import AdminCustomerPage from './pages/admin/customer_data/AdminCustomerPage';
+import AdminCustomersPage from './pages/admin/customer_data/AdminCustomersPage';
+import AdminEditCustomerPage from './pages/admin/customer_data/AdminEditCustomerPage';
+import Dashboard from './pages/admin/Dashboard';
+import AdminAddNewEmployeePage from './pages/admin/employee_data/AdminAddNewEmployeePage';
+import AdminEditEmployeePage from './pages/admin/employee_data/AdminEditEmployeePage';
+import AdminEmployeePage from './pages/admin/employee_data/AdminEmployeePage';
+import AdminEmployeesPage from './pages/admin/employee_data/AdminEmployeesPage';
+import AdminAddServicePage from './pages/admin/service_data/AdminAddServicePage';
+import AdminEditServicePage from './pages/admin/service_data/AdminEditServicePage';
+import AdminServicesPage from './pages/admin/service_data/AdminServicesPage';
+import HomePage from './pages/home/HomePage';
+import ServicesPage from './pages/services/ServicesPage';
+import Footer from './shared/Footer';
+import Header from './shared/Header'
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <div>
+      <Header />
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route path='/services' element={<ServicesPage />} />
+        
+        
+      
+      <Route path='/dashboard' element={<Dashboard />} />
+      <Route path='/admin/customers' element={<AdminCustomersPage />} />
+      <Route path='/admin/customer/:Customer_ID' element={<AdminCustomerPage />} />
+      <Route path='/admin/create/customer' element={<AdminAddCustomerPage />} />
+      <Route path='/admin/edit/customer/:Customer_ID' element={<AdminEditCustomerPage />} />
+
+      <Route path='/admin/customer/invoice/:Customer_ID' element={<AdminCustomerInvoicePage />} />
+
+
+      <Route path='/admin/employees' element={<AdminEmployeesPage />} />
+      <Route path='/admin/employee/:id' element={<AdminEmployeePage />} />
+      <Route path='/admin/create/employee' element={<AdminAddNewEmployeePage />} />
+      <Route path='/admin/edit/employee/:id' element={<AdminEditEmployeePage />} />
+
+
+      <Route path='/admin/services' element={<AdminServicesPage />} />
+      <Route path='/admin/create/service' element={<AdminAddServicePage />} />
+      <Route path='/admin/edit/service/:Service_ID' element={<AdminEditServicePage />} />
+
+      
+      </Routes>
+      {/* <Footer /> */}
+  </div>
   );
 }
 
