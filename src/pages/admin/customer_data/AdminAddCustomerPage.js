@@ -24,7 +24,47 @@ const AdminAddCustomerPage = () => {
     addCustomer()
   }
 
-  const [ uniqueIdentifier, setUniqueIdentifier ] = useState(uuidv4())
+  const addCustomer = () => {
+    axios.post('http://localhost:5001/api/customer/add-customer', {
+      customerFirstName: customerFirstName, 
+      customerLastName: customerLastName, 
+      customerEmail: customerEmail, 
+      customerAddress: customerAddress, 
+      customerCity: customerCity, 
+      customerState: customerState, 
+      customerZip: customerZip, 
+      customerStart: customerStarted, 
+      customerEnd: customerEnd, 
+      customerComplaints: customerComplaints, 
+      customerService: customerService, 
+      customerTurfSqft: customerTurfSqft, 
+      customerWeeklyExpense: customerWeeklyExpense, 
+      customerSeasonalExpense: customerSeasonalExpense, 
+      customerOneTimeServiceExpense: customerOneTimeServiceExpense, 
+      customerDistance: customerDistance, 
+      customerNotes: customerNotes, 
+      customerPriority: customerPriority, 
+      customerBillingAddress: customerBillingAddress, 
+      customerBillingCity: customerBillingCity, 
+      customerBillingState: customerBillingState, 
+      customerBillingZip: customerBillingZip, 
+      customerPaymentType: customerPaymentType, 
+    })
+  }
+
+
+  
+
+
+
+
+  // const addCustomer = () => {
+  //   axios.post('http://localhost:5001/api/customer/add-customer', (req, res) => {
+      
+  //   })
+  // }
+
+  // const [ uniqueIdentifier, setUniqueIdentifier ] = useState(uuidv4())
   const [ customerFirstName ,setCustomerFirstName ] = useState('')
   const [ customerLastName ,setCustomerLastName ] = useState('')
   const [ customerPhone ,setCustomerPhone ] = useState('')
@@ -36,6 +76,7 @@ const AdminAddCustomerPage = () => {
   const [ customerZip , setCustomerZip ] = useState('')
   const [ customerCountry , setCustomerCountry ] = useState('')
   const [ customerStarted , setCustomerStarted] = useState('')
+  const [ customerEnd , setCustomerEnd ] = useState('')
   const [ customerComplaints , setCustomerComplaints ] = useState('')
   const [ customerService , setCustomerService ] = useState('')
   const [ customerTurfSqft , setCustomerTurfSqft ] = useState('')
@@ -80,7 +121,7 @@ const AdminAddCustomerPage = () => {
             </div>
 
             <div >
-              <input type='hidden' id="uniqueIdentifier" name="uniqueIdentifier" value={uniqueIdentifier} />
+              {/* <input type='hidden' id="uniqueIdentifier" name="uniqueIdentifier" value={uniqueIdentifier} /> */}
             </div>
 
 
@@ -526,7 +567,7 @@ const AdminAddCustomerPage = () => {
             </button>
             <button
               type="submit"
-              onClick={onClickAddCustomer}
+              onClick={addCustomer}
               className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
               Save

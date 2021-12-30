@@ -5,6 +5,7 @@ import AdminCustomerInvoicePage from './pages/admin/customer_data/AdminCustomerI
 import AdminCustomerPage from './pages/admin/customer_data/AdminCustomerPage';
 import AdminCustomersPage from './pages/admin/customer_data/AdminCustomersPage';
 import AdminEditCustomerPage from './pages/admin/customer_data/AdminEditCustomerPage';
+import AdminTest from './pages/admin/customer_data/AdminTest';
 import Dashboard from './pages/admin/Dashboard';
 import AdminAddNewEmployeePage from './pages/admin/employee_data/AdminAddNewEmployeePage';
 import AdminEditEmployeePage from './pages/admin/employee_data/AdminEditEmployeePage';
@@ -25,11 +26,14 @@ function App() {
       <Header />
       <Routes>
         <Route path='/' element={<HomePage />} />
+        <Route path='/test' element={<AdminTest />} />
+
         <Route path='/services' element={<ServicesPage />} />
         
-        
+      
       
       <Route path='/dashboard' element={<Dashboard />} />
+      
       <Route path='/admin/customers' element={<AdminCustomersPage />} />
       <Route path='/admin/customer/:Customer_ID' element={<AdminCustomerPage />} />
       <Route path='/admin/create/customer' element={<AdminAddCustomerPage />} />
