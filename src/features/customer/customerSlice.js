@@ -2,10 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = [];
 
+
+
 const customerSlice = createSlice ({
   name:"customers",
   initialState,
-  reducer:{
+  reducers:{
     customerAdded(state, action){
       state.push(action.payload)
   },

@@ -305,14 +305,19 @@ const Header = () => {
   // </Popover>
   <nav>
     <Link to='/dashboard'>{" "}Dashboard{" "}</Link>
-    <Link to='/test'>{" "}Test{" "}</Link>
-    <Link to='/admin/create/customer'>{" "}Create customer{" "}</Link>
+    {/* <Link to='/test'>{" "}Test{" "}</Link> */}
+    <Link to='/admin/create/customer'>|{" "}Create customer{" "}</Link>
+    <Link to='/admin/customers'>|{" "}CustomerList{" "}</Link>
     
-    <Link to='/admin/edit/:Customer_ID'>{" "}edit{" "}</Link>
-    <Link to='/admin/customers'>{" "}CustomerList{" "}</Link>
+    <Link to='/admin/create/employee'>|{" "}Create Employee{" "}</Link>
+    <Link to='/admin/employees'>|{" "}Employee List{" "}</Link>
+    
+
     <Link to=''></Link>
-    <Link to=''></Link>
-    <Link to=''></Link>
+
+    {/* <Link to=''></Link> */}
+    {/* <Link to=''></Link> */}
+    {/* <Link to=''></Link> */}
   </nav>
   )
 }
