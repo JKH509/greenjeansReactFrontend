@@ -1,8 +1,12 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import EarlyBirdSpecials from '../../components/Services/EarlyBirdSpecials'
+
+import house_lawn from '../../assets/images/gibbon-house-unsplash.jpg'
+
 
 const navigation = [
   { name: 'Product', href: '#' },
@@ -147,20 +151,20 @@ const HomePage = () => {
             </p>
             <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
               <div className="rounded-md shadow">
-                <a
+                {/* <a
                   href="#"
                   className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10"
                 >
                   Get started
-                </a>
+                </a> */}
               </div>
               <div className="mt-3 sm:mt-0 sm:ml-3">
-                <a
+                {/* <Link
                   href="#"
                   className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-700 bg-blue-100 hover:bg-blue-200 md:py-4 md:text-lg md:px-10"
                 >
                   Live demo
-                </a>
+                </Link> */}
               </div>
             </div>
           </div>
@@ -168,9 +172,10 @@ const HomePage = () => {
       </div>
     </div>
     <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+      {/* &auto=format&fit=crop&w=2850&q=80 */}
       <img
         className="h-56 w-full object-cover sm:h-72 md:h-96  lg:w-full lg:h-full"
-        src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"
+        src={house_lawn}
         alt=""
       />
     </div>
@@ -202,7 +207,7 @@ const HomePage = () => {
 
 
 
-    <div className="relative bg-gray-50 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8">
+    {/* <div className="relative bg-gray-50 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8">
       <div className="absolute inset-0">
         <div className="bg-white h-1/3 sm:h-2/3" />
       </div>
@@ -256,7 +261,7 @@ const HomePage = () => {
           ))}
         </div>
       </div>
-    </div>
+    </div> */}
 
 
 

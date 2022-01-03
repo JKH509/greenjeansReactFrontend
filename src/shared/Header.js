@@ -311,9 +311,12 @@ const Header = () => {
     
     <Link to='/admin/create/employee'>|{" "}Create Employee{" "}</Link>
     <Link to='/admin/employees'>|{" "}Employee List{" "}</Link>
+
+    <Link to='/admin/services'>|{" "}Services List{" "}</Link>
+    <Link to='/admin/create/service'>|{" "}Create Service{" "}</Link>
     
 
-    <Link to=''></Link>
+    <Link to='/profile'>Profile</Link>
 
     {/* <Link to=''></Link> */}
     {/* <Link to=''></Link> */}

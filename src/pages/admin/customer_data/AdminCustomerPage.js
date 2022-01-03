@@ -17,6 +17,14 @@ useEffect(() => {
   fetchData()
 }, [Customer_ID])// eslint-disable-line react-hooks/exhaustive-deps
 
+
+const deleteCustomer = (Customer_ID) => {
+  axios.delete(`http://localhost:5001/api/customer/delete/${Customer_ID}`).then((response) =>{
+  })
+}
+
+
+
   return (
     <div key={customer.Customer_ID}>
       <div>
@@ -28,7 +36,7 @@ useEffect(() => {
         <Link to={`/admin/edit/customer/${customer.Customer_ID}`}>
           Edit this customer
         </Link>
-        <button onClick={(e) => alert("Soon to be deleted")}>
+        <button onClick={(e) => deleteCustomer(`${customer.Customer_ID}`)}>
           Delete this customer
         </button>
       </div>

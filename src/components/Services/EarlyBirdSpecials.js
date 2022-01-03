@@ -1,23 +1,27 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+
+
+
 
 const collections = [
   {
     name: "Fertilizer Specials",
-    href: '#',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-04-collection-01.jpg',
+    to: '/fertilizer-services',
+    imageSrc: 'https://www.lawnbuddies.com/hs-fs/hubfs/EDITEDLB_AUG_2015_0027-scaled.jpeg?width=600&name=EDITEDLB_AUG_2015_0027-scaled.jpeg',
     imageAlt: 'Woman wearing an off-white cotton t-shirt.',
   },
   {
     name: "Sprinkler Specials",
-    href: '#',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-04-collection-02.jpg',
-    imageAlt: 'Man wearing a charcoal gray cotton t-shirt.',
+    to: '/sprinkler-services',
+    imageSrc: require("../../assets/images/victor-sprinkler-unsplash.jpg"),
+    imageAlt: 'Pop up sprinkler in the fall season',
   },
   {
     name: 'Lawn Care Specials',
-    href: '#',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-04-collection-03.jpg',
-    imageAlt: 'Person sitting at a wooden desk with paper note organizer, pencil and tablet.',
+    to: '/lawn-services',
+    imageSrc: require("../../assets/images/remi-lawn-unsplash.jpg"),
+    imageAlt: 'Person maintaining sports field lawn',
   },
 ]
 
@@ -30,7 +34,7 @@ const EarlyBirdSpecials = () => {
         <div className="flex-1 relative w-full bg-gray-800">
           <div className="absolute inset-0 overflow-hidden">
             <img
-              src="https://tailwindui.com/img/ecommerce-images/home-page-04-hero-full-width.jpg"
+              src="https://www.thespruce.com/thmb/b5IZ_jeCsj2VPd_NP1VaXdZG8To=/2001x1499/filters:fill(auto,1)/GettyImages-1255835530-97204ae990c6438b96a6f7534bb08ba5.jpg"
               alt=""
               className="w-full h-full object-center object-cover"
             />
@@ -46,7 +50,7 @@ const EarlyBirdSpecials = () => {
           <div className="flex-1 relative w-full bg-gray-800">
             <div className="absolute inset-0 overflow-hidden">
               <img
-                src="https://tailwindui.com/img/ecommerce-images/home-page-04-hero-full-width.jpg"
+                src="https://www.thespruce.com/thmb/b5IZ_jeCsj2VPd_NP1VaXdZG8To=/2001x1499/filters:fill(auto,1)/GettyImages-1255835530-97204ae990c6438b96a6f7534bb08ba5.jpg"
                 alt=""
                 className="w-full h-full object-center object-cover"
               />
@@ -58,19 +62,19 @@ const EarlyBirdSpecials = () => {
         <div className="relative py-32">
           <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl">Early Bird Discounts</h1>
           <div className="mt-4 sm:mt-6">
-            <a
-              href="#"
-              className="inline-block bg-indigo-600 border border-transparent rounded-md py-3 px-8 font-medium text-white hover:bg-indigo-700"
+            <Link
+              to="/services"
+              className="inline-block bg-green-600 border border-transparent rounded-md py-3 px-8 font-medium text-white hover:bg-blue-700"
             >
               Look at Services
-            </a>
+            </Link>
           </div>
         </div>
       </div>
 
       <section aria-labelledby="collection-heading" className="-mt-96 relative sm:mt-0">
         <h2 id="collection-heading" className="sr-only">
-          Collections
+          Services
         </h2>
         <div className="max-w-md mx-auto grid grid-cols-1 gap-y-6 px-4 sm:max-w-7xl sm:px-6 sm:grid-cols-3 sm:gap-y-0 sm:gap-x-6 lg:px-8 lg:gap-x-8">
           {collections.map((collection) => (
@@ -92,13 +96,13 @@ const EarlyBirdSpecials = () => {
                 <div className="absolute inset-0 rounded-lg p-6 flex items-end">
                   <div>
                     <p aria-hidden="true" className="text-sm text-white">
-                      Shop the collection
+                      Look at service
                     </p>
                     <h3 className="mt-1 font-semibold text-white">
-                      <a href={collection.href}>
+                      <Link to={collection.to}>
                         <span className="absolute inset-0" />
                         {collection.name}
-                      </a>
+                      </Link>
                     </h3>
                   </div>
                 </div>

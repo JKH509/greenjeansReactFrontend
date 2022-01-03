@@ -19,6 +19,8 @@ import ServicesPage from './pages/services/ServicesPage';
 import NotFound from './NotFound';
 // import Footer from './shared/Footer';
 import Header from './shared/Header'
+import AdminServicePage from './pages/admin/service_data/AdminServicePage';
+import EmployeeProfile from './pages/profiles/EmployeeProfile';
 
 
 function App() {
@@ -51,6 +53,10 @@ function App() {
           element={<AdminCustomerInvoicePage />}
         />
 
+        <Route path="/profile" element={<EmployeeProfile />} />
+
+
+
         <Route path="/admin/employees" element={<AdminEmployeesPage />} />
         <Route path="/admin/employee/:id" element={<AdminEmployeePage />} />
         <Route
@@ -63,9 +69,10 @@ function App() {
         />
 
         <Route path="/admin/services" element={<AdminServicesPage />} />
+        <Route path="/admin/service/:id" element={<AdminServicePage />} />
         <Route path="/admin/create/service" element={<AdminAddServicePage />} />
         <Route
-          path="/admin/edit/service/:Service_ID"
+          path="/admin/edit/service/:id"
           element={<AdminEditServicePage />}
         />
 

@@ -1,11 +1,12 @@
 import React, {useState} from 'react'
 import axios from 'axios';
+import FileUpload from '../file_uploads/FileUpload';
 
 const AdminAddNewEmployeePage = () => {
 
 
 
-  const addCustomer = () => {
+  const addNewEmployee = () => {
     axios.post('http://localhost:5001/api/employee/add-employee', {
       employeeFirstName: employeeFirstName, 
       employeeLastName: employeeLastName, 
@@ -669,6 +670,12 @@ const AdminAddNewEmployeePage = () => {
             </p>
           </div>
 
+
+          <FileUpload />
+
+
+
+
           <div className="sm:col-span-6">
             <label
               htmlFor="photo"
@@ -695,6 +702,8 @@ const AdminAddNewEmployeePage = () => {
             </div>
           </div>
 
+          
+
           <div className="sm:col-span-6">
             <label
               htmlFor="cover-photo"
@@ -718,6 +727,7 @@ const AdminAddNewEmployeePage = () => {
                     strokeLinejoin="round"
                   />
                 </svg>
+
                 <div className="flex text-sm text-gray-600">
                   <label
                     htmlFor="file-upload"
@@ -752,7 +762,7 @@ const AdminAddNewEmployeePage = () => {
           </button>
           <button
             type="submit"
-            onClick={addCustomer}
+            onClick={addNewEmployee}
             className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
           >
             Save
