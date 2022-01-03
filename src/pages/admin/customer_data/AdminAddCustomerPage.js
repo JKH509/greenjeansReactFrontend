@@ -54,17 +54,19 @@ const AdminAddCustomerPage = () => {
   }
 
 
-
+  const [ uuid, setUuid ] = useState(uuidv4())
   const [ customerFirstName ,setCustomerFirstName ] = useState('')
   const [ customerLastName ,setCustomerLastName ] = useState('')
+  const [ customerEmail , setCustomerEmail ] = useState('')
   const [ customerPhone ,setCustomerPhone ] = useState('')
   const [ customerMobile ,setCustomerMobile ] = useState('')
-  const [ customerEmail , setCustomerEmail ] = useState('')
+  
   const [ customerAddress , setCustomerAddress ] = useState('')
   const [ customerCity , setCustomerCity ] = useState('')
   const [ customerState , setCustomerState ] = useState('')
   const [ customerZip , setCustomerZip ] = useState('')
   const [ customerCountry , setCustomerCountry ] = useState('')
+
   const [ customerStarted , setCustomerStarted] = useState(new Date())
   const [ customerEnd , setCustomerEnd ] = useState('')
   const [ customerComplaints , setCustomerComplaints ] = useState('')
@@ -81,26 +83,25 @@ const AdminAddCustomerPage = () => {
   const [ customerBillingCity , setCustomerBillingCity ] = useState(customerCity)
   const [ customerBillingState , setCustomerBillingState ] = useState(customerState)
   const [ customerBillingZip , setCustomerBillingZip ] = useState('')
+
   const [ customerPaymentType , setCustomerPaymentType ] = useState(customerZip)
+
+  const [ billingCheckbox, setBillingCheckbox ] = useState(false)
   
 
-  // function fillBilling(){
-    // customerBillingAddress(firstName);
-    // setLastNameBInput(lastName);
-    // customerBillingAddress(customerAddress);
-    // setAddressB2Input(address2);
-    // customerBillingCity(customerCity);
-    // customerBillingState(customerState);
-    // customerBillingZip(customerZip);
-
-  // }
+  const fillBilling = () => {
+    customerBillingAddress(customerAddress);
+    customerBillingCity(customerCity);
+    customerBillingState(customerState);
+    customerBillingZip(customerZip);
+  }
 
   return (
     <div className="container">
       <form className="space-y-8 divide-y divide-gray-200 ">
         <div className="space-y-8 divide-y divide-gray-200">
           <div className="pt-8">
-
+            <input type="hidden" value={uuid} />
             <div>
               <h3 className="text-lg leading-6 font-medium text-gray-900">
                 Customer Information
@@ -111,31 +112,26 @@ const AdminAddCustomerPage = () => {
             </div>
 
             <div className="flex items-center h-5">
-              Check if Information is NOT the same for billing ?{" "}
+              Check if Information is the same for billing ?{" "}
               <input
-                id="offers"
-                name="offers"
+                id="billingCheckbox"
+                name="billingCheckbox"
                 type="checkbox"
-                className=" text-blue-600 border-gray-300 rounded ml-2"
+                className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded ml-2"
+                // value="true"
+                onChange={(e) => {
+                  if (e.target.checked === true) {
+                    setBillingCheckbox(true);
+                  } else if (e.target.checked !== true) {
+                    setBillingCheckbox(false);
+
+                    fillBilling();
+                  }
+                }}
               />
             </div>
 
-
-
-
-
-
-
-
-
-
             <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-              
-
-
-
-
-              
               <div className="sm:col-span-3">
                 <label
                   htmlFor="customerFirstName"
@@ -328,8 +324,117 @@ const AdminAddCustomerPage = () => {
                   </select>
                 </div>
               </div>
+
+              {billingCheckbox !== true ? (
+                <>
+                  <div className="sm:col-span-6">
+                    <label
+                      htmlFor="customerBillingAddress"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Billing Street address
+                    </label>
+                    <div className="mt-1">
+                      <input
+                        type="text"
+                        name="customerBillingAddress"
+                        id="customerBillingAddress"
+                        autoComplete="street-address"
+                        onChange={(e) =>
+                          setCustomerBillingAddress(e.target.value)
+                        }
+                        className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="sm:col-span-2">
+                    <label
+                      htmlFor="customerBillingCity"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Billing City
+                    </label>
+                    <div className="mt-1">
+                      <input
+                        type="text"
+                        name="customerBillingCity"
+                        id="customerBillingCity"
+                        autoComplete="address-level2"
+                        onChange={(e) => setCustomerBillingCity(e.target.value)}
+                        className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="sm:col-span-2">
+                    <label
+                      htmlFor="customerBillingState"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      State / Province
+                    </label>
+                    <div className="mt-1">
+                      <input
+                        type="text"
+                        name="customerBillingState"
+                        id="customerBillingState"
+                        autoComplete="address-level1"
+                        onChange={(e) =>
+                          setCustomerBillingState(e.target.value)
+                        }
+                        className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="sm:col-span-1">
+                    <label
+                      htmlFor="customerBillingZip"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Billing ZIP / Postal code
+                    </label>
+                    <div className="mt-1">
+                      <input
+                        type="text"
+                        name="customerBillingZip"
+                        id="customerBillingZip"
+                        autoComplete="postal-code"
+                        onChange={(e) => setCustomerBillingZip(e.target.value)}
+                        className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="sm:col-span-1">
+                    <label
+                      htmlFor="customerCountry"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Country
+                    </label>
+                    <div className="mt-1">
+                      <select
+                        id="customerCountry"
+                        name="customerCountry"
+                        autoComplete="country-name"
+                        onChange={(e) => setCustomerCountry(e.target.value)}
+                        className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                      >
+                        <option>United States</option>
+                        <option>Canada</option>
+                        <option>Mexico</option>
+                      </select>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                ""
+              )}
+
               {/* <MainForm customerFirstName={customerFirstName} customerLastName={customerLastName} setEmail={customerEmail} setPhone={customerPhone}  */}
-{/* setMobile={customerMobile} setAddress={customerAddress} setCity={customerCity} setState={customerState} setZip={customerZip} setCountry={customerCountry}  /> */}
+              {/* setMobile={customerMobile} setAddress={customerAddress} setCity={customerCity} setState={customerState} setZip={customerZip} setCountry={customerCountry}  /> */}
 
               <div className="sm:col-span-1">
                 <label
