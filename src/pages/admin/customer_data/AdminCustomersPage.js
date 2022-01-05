@@ -17,7 +17,7 @@ const AdminCustomersPage = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const request = await axios.get('http://localhost:5001/api/customer/list')
+      const request = await axios.get('http://localhost:5001/api/customers/list')
       setCustomers(request.data)
       return request;
     }
@@ -34,13 +34,13 @@ const AdminCustomersPage = () => {
              key={customer.email}
              className={custIdx % 2 === 0 ? "bg-white" : "bg-gray-100"}
              // eslint-disable-next-line react/jsx-no-duplicate-props
-             key={customer.Customer_ID}
+             key={customer.customer_id}
            >
              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                {customer.first_name}{" "}{customer.last_name}
              </td>
              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-               {customer.address}
+               {customer.street_address}
              </td>
              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                {customer.email}
@@ -48,8 +48,9 @@ const AdminCustomersPage = () => {
              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                {customer.phone_number}
              </td>
+             <td><img src={`http://localhost:5001/${customer.property_image}`} alt={customer.customer_id} /></td>
              <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-               <Link to={`/admin/customer/${customer.Customer_ID}`} className="text-blue-600 hover:text-blue-900">
+               <Link to={`/admin/customer/${customer.customer_id}`} className="text-blue-600 hover:text-blue-900">
                  View
                </Link>
              </td>

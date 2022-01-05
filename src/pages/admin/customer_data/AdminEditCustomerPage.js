@@ -1,22 +1,24 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios';
 import { useParams } from 'react-router'
 
 const AdminEditCustomerPage = () => {
-const {Customer_ID} = useParams();
+const {customer_id} = useParams();
+const [ customer, setCustomer ] = useState('')
 
-// useEffect(() => {
-//   async function fetchData() {
-//     const request = await axios.get(`http://localhost:5001/api/customer/${Customer_ID}`)
-//     setCustomer(request.data[0])
-//     console.log(request.data[0])
-//     return request;
-//   }
-//   fetchData()
-// }, [])
+useEffect(() => {
+  async function fetchData() {
+    const request = await axios.get(`http://localhost:5001/api/customer/${customer_id}`)
+    setCustomer(request.data)
+    return request;
+  }
+  fetchData()
+}, [])
 
   return (
     <div>
       Edit customer page
+      {customer.first_name}
     </div>
   )
 }

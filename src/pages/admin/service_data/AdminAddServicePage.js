@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 
+
+
 const AdminAddServicePage = () => {
 
 
@@ -16,29 +18,64 @@ const AdminAddServicePage = () => {
   const [ newServiceSeasonSummerCheckBox, setNewServiceSeasonSummerCheckBox ] = useState('')
   const [ newServiceSeasonFallCheckBox, setNewServiceSeasonFallCheckBox ] = useState('')
   const [ newServiceSeasonWinterCheckBox, setNewServiceSeasonWinterCheckBox ] = useState('')
+
+  const [ service_image, setServiceImage ] = useState('')
+
   
+  // const [file, setFile] = useState();
+  // const [fileName, setFileName] = useState("");
+
+  // const saveFile = (e) => {
+  //   setFile(e.target.files[0]);
+  //   setFileName(e.target.files[0].name);
+  // };
+
+  // const uploadFile = async (e) => {
+  //   const formData = new FormData();
+  //   formData.append("file", file);
+  //   formData.append("fileName", fileName);
+  //   try {
+  //     const res = await axios.post("http://localhost:5001/upload", formData);
+  //     console.log(res);
+  //   } catch (ex) {
+  //     console.log(ex);
+  //   }
+  // };
   
-  const addService = () => {
-    axios.post('http://localhost:5001/api/service/add-service', {
-      newServiceName: newServiceName, 
-      newServiceDescription: newServiceDescription,
-      newServicePrice: newServicePrice, 
-      newServiceWarranty: newServiceWarranty, 
-      newServiceWarrantyDescription: newServiceWarrantyDescription, 
-      newServiceSeasonSpringCheckBox: newServiceSeasonSpringCheckBox, 
-      newServiceSeasonSummerCheckBox: newServiceSeasonSummerCheckBox, 
-      newServiceSeasonFallCheckBox: newServiceSeasonFallCheckBox, 
-      newServiceSeasonWinterCheckBox: newServiceSeasonWinterCheckBox, 
-    })
-  }
+
+  const addService = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("service_type", newServiceName);
+    formData.append("service_description", newServiceDescription);
+    formData.append("service_price", newServicePrice);
+    formData.append("service_warranty", newServiceWarranty);
+    formData.append("warranty_description", newServiceWarrantyDescription);
+    formData.append("service_season_spring", newServiceSeasonSpringCheckBox);
+    formData.append("service_season_summer", newServiceSeasonSummerCheckBox);
+    formData.append("service_season_fall", newServiceSeasonFallCheckBox);
+    formData.append("service_season_winter", newServiceSeasonWinterCheckBox);
+    formData.append("service_image", service_image);
+
+    axios.post("http://localhost:5001/api/service/add-service", formData);
+  };
+
+     // axios.post('http://localhost:5001/api/service/add-service', {
+    //   service_type: newServiceName, 
+    //   service_description: newServiceDescription,
+    //   service_price: newServicePrice, 
+    //   service_warranty: newServiceWarranty, 
+    //   warranty_description: newServiceWarrantyDescription, 
+    //   service_season_spring: newServiceSeasonSpringCheckBox, 
+    //   service_season_summer: newServiceSeasonSummerCheckBox, 
+    //   service_season_fall: newServiceSeasonFallCheckBox, 
+    //   service_season_winter: newServiceSeasonWinterCheckBox, 
+    // })
    // newServiceSeasonAllCheckBox: newServiceSeasonAllCheckBox,
 
 
-console.log(newServiceName)
-console.log(newServiceDescription)
-console.log(newServicePrice)
-console.log(newServiceWarranty)
-console.log(newServiceWarrantyDescription)
+
 
 
   
@@ -46,13 +83,28 @@ console.log(newServiceWarrantyDescription)
 
 
   return (
-    <form className="space-y-8 divide-y divide-gray-200 container">
+    <form
+      className="space-y-8 divide-y divide-gray-200 container"
+      onSubmit={addService}
+      method="POST"
+      // action="/profile-upload-single"
+       encType='multipart/form-data'
+    >
       <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
         <div className="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
           <div>
             <h3 className="text-lg leading-6 font-medium text-gray-900">
               Add Service Information
             </h3>
+          </div>
+
+          <div>
+            <label>Upload profile picture</label>
+            <input type="file" name="service_image" size='lg' onChange={(e) => setServiceImage(e.target.files[0])} />
+            {/* <input type="file" onChange={saveFile} /> */}
+            {/* <div>
+              <input type="submit" value="Upload" onClick={addService} />
+            </div> */}
           </div>
 
           <div className="space-y-6 sm:space-y-5">
@@ -133,22 +185,24 @@ console.log(newServiceWarrantyDescription)
 
             {newServiceWarranty === "Yes" ? (
               <div className="sm:grid sm:grid-cols-3 sm:gap-4">
-              <label
-                htmlFor="newServiceWarrantyDescription"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Add a description for the warranty
-              </label>
-              <div className="mt-1">
-                <textarea
-                  type="text"
-                  name="newServiceWarrantyDescription"
-                  id="newServiceWarrantyDescription"
-                  onChange={(e) => setNewServiceWarrantyDescription(e.target.value)}
-                  className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                />
+                <label
+                  htmlFor="newServiceWarrantyDescription"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Add a description for the warranty
+                </label>
+                <div className="mt-1">
+                  <textarea
+                    type="text"
+                    name="newServiceWarrantyDescription"
+                    id="newServiceWarrantyDescription"
+                    onChange={(e) =>
+                      setNewServiceWarrantyDescription(e.target.value)
+                    }
+                    className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                  />
+                </div>
               </div>
-            </div>
             ) : (
               ""
             )}
@@ -173,19 +227,16 @@ console.log(newServiceWarrantyDescription)
                     id="newServiceSeasonSpringCheckBox"
                     name="newServiceSeasonSpringCheckBox"
                     type="checkbox"
-                    className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"        
+                    className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
                     value="true"
                     onChange={(e) => {
                       if (e.target.checked === true) {
-                        setNewServiceSeasonSpringCheckBox("Spring")
+                        setNewServiceSeasonSpringCheckBox("Spring");
                       } else if (e.target.checked !== true) {
-                        setNewServiceSeasonSpringCheckBox("")
+                        setNewServiceSeasonSpringCheckBox("");
                       }
                     }}
-
-                    
                   />
-                  {console.log(newServiceSeasonSpringCheckBox)}
                   {/* </div>
 
                 <div className="ml-3 flex items-center h-5"> */}
@@ -203,15 +254,12 @@ console.log(newServiceWarrantyDescription)
                     value="true"
                     onChange={(e) => {
                       if (e.target.checked === true) {
-                        setNewServiceSeasonSummerCheckBox("Summer")
+                        setNewServiceSeasonSummerCheckBox("Summer");
                       } else if (e.target.checked !== true) {
-                        setNewServiceSeasonSummerCheckBox("")
+                        setNewServiceSeasonSummerCheckBox("");
                       }
                     }}
-
-
                   />
-                  {console.log(newServiceSeasonSummerCheckBox)}
                 </div>
 
                 <div className="ml-3 flex items-center h-5 mt-2">
@@ -258,7 +306,6 @@ console.log(newServiceWarrantyDescription)
                       }
                     }}
                   />
-                  {console.log(newServiceSeasonWinterCheckBox)}
                 </div>
               </div>
             </div>
@@ -274,12 +321,16 @@ console.log(newServiceWarrantyDescription)
           >
             Cancel
           </button>
+          
           <button
-            onClick={addService}
+          type="submit"
+            // onClick={addService}
             className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
           >
             Save
           </button>
+
+          <div></div>
         </div>
       </div>
     </form>

@@ -1,100 +1,99 @@
 import React, {useState} from 'react'
 import axios from 'axios';
 import FileUpload from '../file_uploads/FileUpload';
+import { v4 as uuidv4 } from 'uuid';
+uuidv4();
+
 
 const AdminAddNewEmployeePage = () => {
 
+  const addNewEmployee = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("uuid", uuid);
+    formData.append("employeeFirstName", employeeFirstName);
+    formData.append("employeeLastName", employeeLastName);
+    formData.append("employeeEmail", employeeEmail);
+    formData.append("employeePhone", employeePhone);
+    formData.append("employeeMobile", employeeMobile);
+    formData.append("employeeAddress", employeeAddress);
+    formData.append("employeeAddressTwo", employeeAddressTwo);
+    formData.append("employeeCity", employeeCity);
+    formData.append("employeeState", employeeState);
+    formData.append("employeeZip", employeeZip);
+    formData.append("employeeCountry", employeeCountry);
+    formData.append("employeeDistance", employeeDistance);
+    formData.append("employeeJobTitle", employeeJobTitle);
+    formData.append("employeeStartingWage", employeeStartingWage);
+    formData.append("employeeLastWage", employeeLastWage);
+    formData.append("employeeGender", employeeGender);
+    formData.append("employeeEthnicity", employeeEthnicity);
+    formData.append("employeeDriversLicenseStatus", employeeDriversLicenseStatus);
+    formData.append("employeeMedicalConditions", employeeMedicalConditions);
+    formData.append("employeeCautions", employeeCautions);
+    formData.append("employee_image", employee_image);
+    formData.append("employeePayPreference", employeePayPreference);
+
+    axios.post("http://localhost:5001/api/employee/add-employee", formData);
+  };
 
 
-  const addNewEmployee = () => {
-    axios.post('http://localhost:5001/api/employee/add-employee', {
-      employeeFirstName: employeeFirstName, 
-      employeeLastName: employeeLastName, 
-      employeeEmail: employeeEmail, 
-      employeeGender: employeeGender,
-      employeeJobTitle: employeeJobTitle,
-      
-      employeeStart: employeeStart, 
-      employeeStartingWage: employeeStartingWage, 
-      employeeLastWage: employeeLastWage, 
-      
-      employeeEnd: employeeEnd, 
-      employeeCautions: employeeCautions, 
-      employeeMedicalConditions: employeeMedicalConditions, 
-      employeeDistance: employeeDistance, 
-      employeeDriversLicenseStatus: employeeDriversLicenseStatus,
-
-      employeeAddress: employeeAddress, 
-      employeeCity: employeeCity, 
-      employeeState: employeeState, 
-      employeeZip: employeeZip, 
-      employeeImage: employeeImage, 
-
-      // employeeWeeklyExpense: employeeWeeklyExpense, 
-      // employeeSeasonalExpense: employeeSeasonalExpense, 
-      // employeeOneTimeServiceExpense: employeeOneTimeServiceExpense, 
-      // employeeNotes: employeeNotes, 
-       
-   
-    })
-  }
-
-
-
-
-
-
+  const [ uuid, setUuid ] = useState(uuidv4())
   const [ employeeFirstName ,setEmployeeFirstName ] = useState('')
   const [ employeeLastName ,setEmployeeLastName ] = useState('')
   const [ employeePhone ,setEmployeePhone ] = useState('')
   const [ employeeMobile ,setEmployeeMobile ] = useState('')
   const [ employeeGender ,setEmployeeGender ] = useState('')
   const [ employeeJobTitle ,setEmployeeJobTitle ] = useState('')
-  const [ employeeStart , setEmployeeStart] = useState(new Date())
+  
   const [ employeeStartingWage ,setEmployeeStartingWage ] = useState('')
+  const [ employeeLastWage ,setEmployeeLastWage ] = useState('')
   const [ employeeEmail , setEmployeeEmail ] = useState('')
   const [ employeeAddress , setEmployeeAddress ] = useState('')
+  const [ employeeAddressTwo , setEmployeeAddressTwo ] = useState('')
   const [ employeeCity , setEmployeeCity ] = useState('')
   const [ employeeState , setEmployeeState ] = useState('')
   const [ employeeZip , setEmployeeZip ] = useState('')
   const [ employeeDistance , setEmployeeDistance ] = useState('')
   const [ employeeCountry , setEmployeeCountry ] = useState('')
-  const [ employeeEnd , setEmployeeEnd ] = useState('')
-
-
-  const [ employeeCautions , setEmployeeCautions ] = useState('')
-  const [ employeeMedicalConditions , setEmployeeMedicalConditions ] = useState('')
+  const [ employeeEthnicity , setEmployeeEthnicity ] = useState('caucasion')
   const [ employeeDriversLicenseStatus , setEmployeeDriversLicenseStatus ] = useState('')
-  const [ employeeLastWage ,setEmployeeLastWage ] = useState('')
-  const [ employeeImage , setEmployeeImage ] = useState('')
+  const [ employeeMedicalConditions , setEmployeeMedicalConditions ] = useState('')
+  const [ employeeCautions , setEmployeeCautions ] = useState('')
+  const [ employee_image , setEmployee_image ] = useState('')
+  const [ employeePayPreference, setEmployeePayPreference ] = useState('checking')
+  
+
+  
 
 
 
 
   return (
     <div className="container">
-    <form className="space-y-8 divide-y divide-gray-200 ">
+     <form
+      className="space-y-8 divide-y divide-gray-200 container"
+      onSubmit={addNewEmployee}
+      method="POST"
+      // action="/profile-upload-single"
+       encType='multipart/form-data'
+    >
       <div className="space-y-8 divide-y divide-gray-200">
         <div className="pt-8">
+          
 
           <div>
             <h3 className="text-lg leading-6 font-medium text-gray-900">
-              Customer Information
+              Empoyee Information
+              <input type='hidden' value={uuid} />
             </h3>
             <p className="mt-1 text-sm text-gray-500">
               Use a permanent address where you can receive mail.
             </p>
           </div>
 
-          <div className="flex items-center h-5">
-            Check if Information is NOT the same for billing ?{" "}
-            <input
-              id="offers"
-              name="offers"
-              type="checkbox"
-              className=" text-blue-600 border-gray-300 rounded ml-2"
-            />
-          </div>
+         
 
 
           <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
@@ -320,7 +319,7 @@ const AdminAddNewEmployeePage = () => {
                 htmlFor="employeeMedicalConditions"
                 className="block text-sm font-medium text-gray-700"
               >
-                employee Medical Conditions
+                Medical Conditions
               </label>
               <div className="mt-1">
                 <input
@@ -338,7 +337,7 @@ const AdminAddNewEmployeePage = () => {
                 htmlFor="employeeDriversLicenseStatus"
                 className="block text-sm font-medium text-gray-700"
               >
-                employeeDriversLicenseStatus
+               License Status
               </label>
               <div className="mt-1">
                 <input
@@ -356,7 +355,7 @@ const AdminAddNewEmployeePage = () => {
                 htmlFor="employeeLastWage"
                 className="block text-sm font-medium text-gray-700"
               >
-                employee Last Wage
+                Last Wage
               </label>
               <div className="mt-1">
                 <input
@@ -371,18 +370,19 @@ const AdminAddNewEmployeePage = () => {
 
             <div className="sm:col-span-1">
               <label
-                htmlFor="employeeImage"
+                htmlFor="employeePayPreference"
                 className="block text-sm font-medium text-gray-700"
               >
-                employee Image
+                Pay options
               </label>
               <div className="mt-1">
                 <input
                   type="text"
-                  name="employeeImage"
-                  id="employeeImage"
+                  name="employeePayPreference"
+                  id="employeePayPreference"
                   onChange={(e) =>
-                    setEmployeeImage(e.target.value)
+                    // setEmployeeImage(e.target.value)
+                    setEmployeePayPreference(e.target.value)
                   }
                   className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
                 />
@@ -416,14 +416,14 @@ const AdminAddNewEmployeePage = () => {
                 htmlFor="employeeEnd"
                 className="block text-sm font-medium text-gray-700"
               >
-                employeeEnd
+                Race
               </label>
               <div className="mt-1">
                 <input
                   type="text"
                   name="employeeEnd"
                   id="employeeEnd"
-                  onChange={(e) => setEmployeeEnd(e.target.value)}
+                  onChange={(e) => setEmployeeEthnicity(e.target.value)}
                   className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
                 />
               </div>
@@ -449,7 +449,7 @@ const AdminAddNewEmployeePage = () => {
 
         
 
-            <div className="sm:col-span-1">
+            {/* <div className="sm:col-span-1">
               <label
                 htmlFor="employeePaymentType"
                 className="block text-sm font-medium text-gray-700"
@@ -465,7 +465,7 @@ const AdminAddNewEmployeePage = () => {
                   className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
                 />
               </div>
-            </div>
+            </div> */}
 
             <div className="sm:col-span-2">
               <label
@@ -506,175 +506,13 @@ const AdminAddNewEmployeePage = () => {
             
           </div>
         </div>
-
-        <div className="pt-8">
-          <div>
-            <h3 className="text-lg leading-6 font-medium text-gray-900">
-              Notifications
-            </h3>
-            <p className="mt-1 text-sm text-gray-500">
-              We'll always let you know about important changes, but you pick
-              what else you want to hear about.
-            </p>
-          </div>
-          <div className="mt-6">
-            <fieldset>
-              <legend className="text-base font-medium text-gray-900">
-                By Email
-              </legend>
-              <div className="mt-4 space-y-4">
-                <div className="relative flex items-start">
-                  <div className="flex items-center h-5">
-                    <input
-                      id="comments"
-                      name="comments"
-                      type="checkbox"
-                      className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
-                    />
-                  </div>
-                  <div className="ml-3 text-sm">
-                    <label
-                      htmlFor="comments"
-                      className="font-medium text-gray-700"
-                    >
-                      Billing
-                    </label>
-                    <p className="text-gray-500">
-                      Get notified when your bill is ready.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="relative flex items-start">
-                  <div className="flex items-center h-5">
-                    <input
-                      id="offers"
-                      name="offers"
-                      type="checkbox"
-                      className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
-                    />
-                  </div>
-                  <div className="ml-3 text-sm">
-                    <label
-                      htmlFor="offers"
-                      className="font-medium text-gray-700"
-                    >
-                      Promotions
-                    </label>
-                    <p className="text-gray-500">
-                      Get notified when we have discounts.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </fieldset>
-            <fieldset className="mt-6">
-              <div>
-                <legend className="text-base font-medium text-gray-900">
-                  Push Notifications
-                </legend>
-                <p className="text-sm text-gray-500">
-                  These are delivered via SMS to your mobile phone.
-                </p>
-              </div>
-              <div className="mt-4 space-y-4">
-                <div className="flex items-center">
-                  <input
-                    id="push-everything"
-                    name="push-notifications"
-                    type="radio"
-                    className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300"
-                  />
-                  <label
-                    htmlFor="push-everything"
-                    className="ml-3 block text-sm font-medium text-gray-700"
-                  >
-                    Everything
-                  </label>
-                </div>
-                <div className="flex items-center">
-                  <input
-                    id="push-email"
-                    name="push-notifications"
-                    type="radio"
-                    className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300"
-                  />
-                  <label
-                    htmlFor="push-email"
-                    className="ml-3 block text-sm font-medium text-gray-700"
-                  >
-                    Same as email
-                  </label>
-                </div>
-                <div className="flex items-center">
-                  <input
-                    id="push-nothing"
-                    name="push-notifications"
-                    type="radio"
-                    className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300"
-                  />
-                  <label
-                    htmlFor="push-nothing"
-                    className="ml-3 block text-sm font-medium text-gray-700"
-                  >
-                    No push notifications
-                  </label>
-                </div>
-              </div>
-            </fieldset>
-          </div>
-        </div>
-      </div>
+</div>
+       
 
       <div>
         <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-          <div className="sm:col-span-4">
-            <label
-              htmlFor="username"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Username
-            </label>
-            <div className="mt-1 flex rounded-md shadow-sm">
-              <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
-                workcation.com/
-              </span>
-              <input
-                type="text"
-                name="username"
-                id="username"
-                autoComplete="username"
-                className="flex-1 focus:ring-blue-500 focus:border-blue-500 block w-full min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300"
-              />
-            </div>
-          </div>
-
-          <div className="sm:col-span-6">
-            <label
-              htmlFor="about"
-              className="block text-sm font-medium text-gray-700"
-            >
-              About
-            </label>
-            <div className="mt-1">
-              <textarea
-                id="about"
-                name="about"
-                rows={3}
-                className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border border-gray-300 rounded-md"
-                defaultValue={""}
-              />
-            </div>
-            <p className="mt-2 text-sm text-gray-500">
-              Write a few sentences about yourself.
-            </p>
-          </div>
-
-
-          <FileUpload />
-
-
-
+          
+          {/* <FileUpload /> */}
 
           <div className="sm:col-span-6">
             <label
@@ -693,12 +531,13 @@ const AdminAddNewEmployeePage = () => {
                   <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
                 </svg>
               </span>
-              <button
+              <input type="file" name="service_image" size='lg' onChange={(e) => setEmployee_image(e.target.files[0])}  className="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"  />
+              {/* <button
                 type="button"
                 className="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               >
                 Change
-              </button>
+              </button> */}
             </div>
           </div>
 
@@ -709,7 +548,7 @@ const AdminAddNewEmployeePage = () => {
               htmlFor="cover-photo"
               className="block text-sm font-medium text-gray-700"
             >
-              Cover photo
+              Empoyee photo
             </label>
             <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
               <div className="space-y-1 text-center">
@@ -762,7 +601,6 @@ const AdminAddNewEmployeePage = () => {
           </button>
           <button
             type="submit"
-            onClick={addNewEmployee}
             className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
           >
             Save

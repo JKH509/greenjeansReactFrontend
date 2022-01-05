@@ -11,6 +11,7 @@ const AdminServicesPage = () => {
     async function fetchData() {
       const request = await axios.get('http://localhost:5001/api/services/list')
       setServices(request.data)
+      console.log(request.data)
       return request;
     }
     fetchData()
@@ -19,13 +20,14 @@ const AdminServicesPage = () => {
   return (
     <div>
       {services.map((service) => (
-        <div key={service.id}>
+        <div key={service.service_id}>
+          <div><img src={`http://localhost:5001/${service.service_image}`} alt={service.service_type} /></div>
           <h1>
-            {service.ServiceType} 
+            {service.service_type} 
             Service id
-            {service.id}
+            {service.service_id}
           </h1>
-          <Link rel="preconnect" to={`/admin/service/${service.id}`}>
+          <Link rel="preconnect" to={`/admin/service/${service.service_id}`}>
             See Service
           </Link>
         </div>

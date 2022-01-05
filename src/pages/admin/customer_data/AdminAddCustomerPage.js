@@ -1,8 +1,9 @@
 import React,{ useState, useEffect } from 'react'
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
-uuidv4();
 
+uuidv4();
+// import DayOfWeekRadio from '../admin_components/DayOfWeekRadio';
 
 
 const AdminAddCustomerPage = () => {
@@ -24,82 +25,86 @@ const AdminAddCustomerPage = () => {
   //   addCustomer()
   // }
 
+  const addCustomer = async (e) => {
+    e.preventDefault();
 
-  const addCustomer = () => {
-    axios.post('http://localhost:5001/api/customer/add-customer', {
-      customerFirstName: customerFirstName, 
-      customerLastName: customerLastName, 
-      customerEmail: customerEmail, 
-      customerAddress: customerAddress, 
-      customerCity: customerCity, 
-      customerState: customerState, 
-      customerZip: customerZip, 
-      customerStart: customerStarted, 
-      customerEnd: customerEnd, 
-      customerComplaints: customerComplaints, 
-      customerService: customerService, 
-      customerTurfSqft: customerTurfSqft, 
-      customerWeeklyExpense: customerWeeklyExpense, 
-      customerSeasonalExpense: customerSeasonalExpense, 
-      customerOneTimeServiceExpense: customerOneTimeServiceExpense, 
-      customerDistance: customerDistance, 
-      customerNotes: customerNotes, 
-      customerPriority: customerPriority, 
-      customerBillingAddress: customerBillingAddress, 
-      customerBillingCity: customerBillingCity, 
-      customerBillingState: customerBillingState, 
-      customerBillingZip: customerBillingZip, 
-      customerPaymentType: customerPaymentType, 
-    })
-  }
+    const formData = new FormData();
+    formData.append("uuid", uuid);
+    formData.append("first_name", customerFirstName);
+    formData.append("last_name", customerLastName);
+    formData.append("email", customerEmail);
+    formData.append("phone_number", customerPhone);
+    formData.append("mobile_phone", customerMobile);
+    formData.append("preferred_priority", customerPriority);
+    formData.append("street_address", customerAddress);
+    formData.append("address_two", customerAddressTwo);
+    formData.append("city", customerCity);
+    formData.append("state", customerState);
+    formData.append("postal_code", customerZip);
+    formData.append("country", customerCountry);
+    formData.append("street_billing_address", customerBillingAddress);
+    formData.append("street_billing_address_two", customerBillingAddressTwo);
+    formData.append("billing_city", customerBillingCity);
+    formData.append("billing_state", customerBillingState);
+    formData.append("billing_postal_code", customerBillingZip);
+    formData.append("distance_fo", customerDistance);
+    formData.append("notes", customerNotes);
+    formData.append("property_image", property_image);
+    formData.append("preferred_payment_method", customerPaymentType);
+
+    axios.post("http://localhost:5001/api/customer/add-customer", formData);
+  };
 
 
   const [ uuid, setUuid ] = useState(uuidv4())
   const [ customerFirstName ,setCustomerFirstName ] = useState('')
   const [ customerLastName ,setCustomerLastName ] = useState('')
   const [ customerEmail , setCustomerEmail ] = useState('')
+  // const [ customerDow , setCustomerDow ] = useState('')
   const [ customerPhone ,setCustomerPhone ] = useState('')
   const [ customerMobile ,setCustomerMobile ] = useState('')
-  
+
   const [ customerAddress , setCustomerAddress ] = useState('')
+  const [ customerAddressTwo , setCustomerAddressTwo ] = useState('')
   const [ customerCity , setCustomerCity ] = useState('')
   const [ customerState , setCustomerState ] = useState('')
   const [ customerZip , setCustomerZip ] = useState('')
-  const [ customerCountry , setCustomerCountry ] = useState('')
-
-  const [ customerStarted , setCustomerStarted] = useState(new Date())
-  const [ customerEnd , setCustomerEnd ] = useState('')
-  const [ customerComplaints , setCustomerComplaints ] = useState('')
-  const [ customerService , setCustomerService ] = useState('')
-  const [ customerTurfSqft , setCustomerTurfSqft ] = useState('')
-  const [ customerWeeklyExpense , setCustomerWeeklyExpense ] = useState('')
-  const [ customerSeasonalExpense , setCustomerSeasonalExpense ] = useState('')
-  const [ customerOneTimeServiceExpense , setCustomerOneTimeServiceExpense ] = useState('')
+  const [ customerCountry , setCustomerCountry ] = useState('United States')
+  const [ customerBillingAddress , setCustomerBillingAddress ] = useState('')
+  const [ customerBillingAddressTwo , setCustomerBillingAddressTwo ] = useState('')
+  const [ customerBillingCity , setCustomerBillingCity ] = useState('')
+  const [ customerBillingState , setCustomerBillingState ] = useState('')
+  const [ customerBillingZip , setCustomerBillingZip ] = useState('')
+  const [ customerBillingCountry , setCustomerBillingCountry ] = useState('United States')
   const [ customerDistance , setCustomerDistance ] = useState('')
   const [ customerNotes , setCustomerNotes ] = useState('')
-  const [ customerPriority , setCustomerPriority ] = useState('')
-
-  const [ customerBillingAddress , setCustomerBillingAddress ] = useState(customerAddress)
-  const [ customerBillingCity , setCustomerBillingCity ] = useState(customerCity)
-  const [ customerBillingState , setCustomerBillingState ] = useState(customerState)
-  const [ customerBillingZip , setCustomerBillingZip ] = useState('')
-
-  const [ customerPaymentType , setCustomerPaymentType ] = useState(customerZip)
-
+  const [ customerPriority , setCustomerPriority ] = useState('Tuesday')
+  const [ customerPaymentType , setCustomerPaymentType ] = useState('Visa')
   const [ billingCheckbox, setBillingCheckbox ] = useState(false)
-  
+   const [ property_image , setProperty_image] = useState('')
 
-  const fillBilling = () => {
-    customerBillingAddress(customerAddress);
-    customerBillingCity(customerCity);
-    customerBillingState(customerState);
-    customerBillingZip(customerZip);
+ const fillBilling  = () => {
+    setCustomerBillingAddress(customerAddress);
+    setCustomerBillingAddressTwo(customerAddressTwo);
+    setCustomerBillingCity(customerCity);
+    setCustomerBillingState(customerState);
+    setCustomerBillingZip(customerZip);
   }
+ 
 
   return (
+    
     <div className="container">
-      <form className="space-y-8 divide-y divide-gray-200 ">
-        <div className="space-y-8 divide-y divide-gray-200">
+      {/* <form className="space-y-8 divide-y divide-gray-200 "> */}
+      <form
+      className="space-y-8 divide-y divide-gray-200 container"
+      onSubmit={addCustomer}
+      method="POST"
+      // action="/profile-upload-single"
+       encType='multipart/form-data'
+    >
+
+        <div className="space-y-8 divide-y divide-gray-200 ">
           <div className="pt-8">
             <input type="hidden" value={uuid} />
             <div>
@@ -120,15 +125,15 @@ const AdminAddCustomerPage = () => {
                 className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded ml-2"
                 // value="true"
                 onChange={(e) => {
-                  if (e.target.checked === true) {
-                    setBillingCheckbox(true);
-                  } else if (e.target.checked !== true) {
-                    setBillingCheckbox(false);
-
+                  if(e.target.checked)
+                  {
+                    setBillingCheckbox(true)
                     fillBilling();
-                  }
-                }}
-              />
+                      } else {
+                    setBillingCheckbox(false)
+                      }
+                    }
+                    }  value="true"  />
             </div>
 
             <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
@@ -251,6 +256,25 @@ const AdminAddCustomerPage = () => {
                   htmlFor="customerCity"
                   className="block text-sm font-medium text-gray-700"
                 >
+                  address two
+                </label>
+                <div className="mt-1">
+                  <input
+                    type="text"
+                    name="customerCity"
+                    id="customerCity"
+                    autoComplete="address-level2"
+                    onChange={(e) => setCustomerAddressTwo(e.target.value)}
+                    className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                  />
+                </div>
+              </div>
+
+              <div className="sm:col-span-2">
+                <label
+                  htmlFor="customerCity"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   City
                 </label>
                 <div className="mt-1">
@@ -340,9 +364,8 @@ const AdminAddCustomerPage = () => {
                         name="customerBillingAddress"
                         id="customerBillingAddress"
                         autoComplete="street-address"
-                        onChange={(e) =>
-                          setCustomerBillingAddress(e.target.value)
-                        }
+                        value={customerBillingAddress}
+                        onChange={(e) => setCustomerBillingAddress(e.target.value) }
                         className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
@@ -361,6 +384,7 @@ const AdminAddCustomerPage = () => {
                         name="customerBillingCity"
                         id="customerBillingCity"
                         autoComplete="address-level2"
+                        value={customerCity}
                         onChange={(e) => setCustomerBillingCity(e.target.value)}
                         className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
                       />
@@ -380,6 +404,7 @@ const AdminAddCustomerPage = () => {
                         name="customerBillingState"
                         id="customerBillingState"
                         autoComplete="address-level1"
+                        value={customerBillingState}
                         onChange={(e) =>
                           setCustomerBillingState(e.target.value)
                         }
@@ -401,6 +426,7 @@ const AdminAddCustomerPage = () => {
                         name="customerBillingZip"
                         id="customerBillingZip"
                         autoComplete="postal-code"
+                        value={customerBillingZip}
                         onChange={(e) => setCustomerBillingZip(e.target.value)}
                         className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
                       />
@@ -419,7 +445,7 @@ const AdminAddCustomerPage = () => {
                         id="customerCountry"
                         name="customerCountry"
                         autoComplete="country-name"
-                        onChange={(e) => setCustomerCountry(e.target.value)}
+                        onChange={(e) => setCustomerBillingCountry(e.target.value)}
                         className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
                       >
                         <option>United States</option>
@@ -431,85 +457,9 @@ const AdminAddCustomerPage = () => {
                 </>
               ) : (
                 ""
-              )}
+               )} 
 
-              {/* <MainForm customerFirstName={customerFirstName} customerLastName={customerLastName} setEmail={customerEmail} setPhone={customerPhone}  */}
-              {/* setMobile={customerMobile} setAddress={customerAddress} setCity={customerCity} setState={customerState} setZip={customerZip} setCountry={customerCountry}  /> */}
-
-              <div className="sm:col-span-1">
-                <label
-                  htmlFor="customerTurfSqft"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Square Footage
-                </label>
-                <div className="mt-1">
-                  <input
-                    type="text"
-                    name="customerTurfSqft"
-                    id="customerTurfSqft"
-                    onChange={(e) => setCustomerTurfSqft(e.target.value)}
-                    className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                  />
-                </div>
-              </div>
-
-              <div className="sm:col-span-1">
-                <label
-                  htmlFor="customerWeeklyExpense"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Weekly Expenses
-                </label>
-                <div className="mt-1">
-                  <input
-                    type="text"
-                    name="customerWeeklyExpense"
-                    id="customerWeeklyExpense"
-                    onChange={(e) => setCustomerWeeklyExpense(e.target.value)}
-                    className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                  />
-                </div>
-              </div>
-
-              <div className="sm:col-span-1">
-                <label
-                  htmlFor="customerSeasonalExpense"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  SeasonalExpense
-                </label>
-                <div className="mt-1">
-                  <input
-                    type="text"
-                    name="customerSeasonalExpense"
-                    id="customerSeasonalExpense"
-                    onChange={(e) => setCustomerSeasonalExpense(e.target.value)}
-                    className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                  />
-                </div>
-              </div>
-
-              <div className="sm:col-span-1">
-                <label
-                  htmlFor="customerOneTimeServiceExpense"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  OneTimeServiceExpense
-                </label>
-                <div className="mt-1">
-                  <input
-                    type="text"
-                    name="customerOneTimeServiceExpense"
-                    id="customerOneTimeServiceExpense"
-                    onChange={(e) =>
-                      setCustomerOneTimeServiceExpense(e.target.value)
-                    }
-                    className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                  />
-                </div>
-              </div>
-
+            
               <div className="sm:col-span-1">
                 <label
                   htmlFor="customerDistance"
@@ -527,26 +477,55 @@ const AdminAddCustomerPage = () => {
                   />
                 </div>
               </div>
-
+ 
               <div className="sm:col-span-1">
                 <label
                   htmlFor="customerPriority"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  customerPriority
+                  Customer Priority
                 </label>
                 <div className="mt-1">
-                  <input
-                    type="text"
-                    name="customerPriority"
+                  <select
                     id="customerPriority"
+                    name="customerPriority"
                     onChange={(e) => setCustomerPriority(e.target.value)}
                     className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                  />
+                  >
+                    <option>Monday</option>
+                    <option>Tuesday</option>
+                    <option>Wednesday</option>
+                    <option>Thursday</option>
+                    <option>Friday</option>
+                  </select>
                 </div>
               </div>
 
-              <div className="sm:col-span-4">
+
+              <div className="sm:col-span-1">
+                <label
+                  htmlFor="customerPaymentType"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Payment Type
+                </label>
+                <div className="mt-1">
+                  <select
+                    id="customerPaymentType"
+                    name="customerPaymentType"
+                   
+                    onChange={(e) => setCustomerPaymentType(e.target.value)}
+                    className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                  >
+                    <option>Visa</option>
+                    <option>Mastercard</option>
+                    <option>Check</option>
+                  </select>
+                </div>
+              </div>
+       
+
+              <div className="sm:col-span-3">
                 <label
                   htmlFor="customerNotes"
                   className="block text-sm font-medium text-gray-700"
@@ -564,278 +543,19 @@ const AdminAddCustomerPage = () => {
                 </div>
               </div>
 
-              <div className="sm:col-span-1">
-                <label
-                  htmlFor="customerEnd"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  customerEnd
-                </label>
-                <div className="mt-1">
-                  <input
-                    type="text"
-                    name="customerEnd"
-                    id="customerEnd"
-                    onChange={(e) => setCustomerEnd(e.target.value)}
-                    className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                  />
-                </div>
-              </div>
 
-              <div className="sm:col-span-1">
-                <label
-                  htmlFor="customerComplaints"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  customerComplaints
-                </label>
-                <div className="mt-1">
-                  <input
-                    type="text"
-                    name="customerComplaints"
-                    id="customerComplaints"
-                    onChange={(e) => setCustomerComplaints(e.target.value)}
-                    className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                  />
-                </div>
-              </div>
+              
+             </div>
 
-              <div className="sm:col-span-1">
-                <label
-                  htmlFor="customerService"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  customer services
-                </label>
-                <div className="mt-1">
-                  <input
-                    type="text"
-                    name="customerService"
-                    id="customerService"
-                    onChange={(e) => setCustomerService(e.target.value)}
-                    className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                  />
-                </div>
-              </div>
 
-              <div className="sm:col-span-1">
-                <label
-                  htmlFor="customerPaymentType"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  customerPaymentType
-                </label>
-                <div className="mt-1">
-                  <input
-                    type="text"
-                    name="customerPaymentType"
-                    id="customerPaymentType"
-                    onChange={(e) => setCustomerPaymentType(e.target.value)}
-                    className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                  />
-                </div>
-              </div>
-
-              <div className="sm:col-span-1">
-                <label
-                  htmlFor="customerBillingAddress"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  BILLING
-                </label>
-                <div className="mt-1">
-                  <input
-                    type="text"
-                    name="customerBillingAddress"
-                    id="customerBillingAddress"
-                    onChange={(e) => setCustomerBillingAddress(e.target.value)}
-                  />
-                  <input
-                    type="text"
-                    name="customerBillingCity"
-                    id="customerBillingCity"
-                    onChange={(e) => setCustomerBillingCity(e.target.value)}
-                  />
-                  <input
-                    type="text"
-                    name="customerBillingState"
-                    id="customerBillingState"
-                    onChange={(e) => setCustomerBillingState(e.target.value)}
-                  />
-                  <input
-                    type="text"
-                    name="customerBillingZip"
-                    id="customerBillingZip"
-                    onChange={(e) => setCustomerBillingZip(e.target.value)}
-                  />
-                </div>
-              </div>
-            </div>
           </div>
 
-          <div className="pt-8">
-            <div>
-              <h3 className="text-lg leading-6 font-medium text-gray-900">
-                Notifications
-              </h3>
-              <p className="mt-1 text-sm text-gray-500">
-                We'll always let you know about important changes, but you pick
-                what else you want to hear about.
-              </p>
-            </div>
-            <div className="mt-6">
-              <fieldset>
-                <legend className="text-base font-medium text-gray-900">
-                  By Email
-                </legend>
-                <div className="mt-4 space-y-4">
-                  <div className="relative flex items-start">
-                    <div className="flex items-center h-5">
-                      <input
-                        id="comments"
-                        name="comments"
-                        type="checkbox"
-                        className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
-                      />
-                    </div>
-                    <div className="ml-3 text-sm">
-                      <label
-                        htmlFor="comments"
-                        className="font-medium text-gray-700"
-                      >
-                        Billing
-                      </label>
-                      <p className="text-gray-500">
-                        Get notified when your bill is ready.
-                      </p>
-                    </div>
-                  </div>
 
-                  <div className="relative flex items-start">
-                    <div className="flex items-center h-5">
-                      <input
-                        id="offers"
-                        name="offers"
-                        type="checkbox"
-                        className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
-                      />
-                    </div>
-                    <div className="ml-3 text-sm">
-                      <label
-                        htmlFor="offers"
-                        className="font-medium text-gray-700"
-                      >
-                        Promotions
-                      </label>
-                      <p className="text-gray-500">
-                        Get notified when we have discounts.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </fieldset>
-              <fieldset className="mt-6">
-                <div>
-                  <legend className="text-base font-medium text-gray-900">
-                    Push Notifications
-                  </legend>
-                  <p className="text-sm text-gray-500">
-                    These are delivered via SMS to your mobile phone.
-                  </p>
-                </div>
-                <div className="mt-4 space-y-4">
-                  <div className="flex items-center">
-                    <input
-                      id="push-everything"
-                      name="push-notifications"
-                      type="radio"
-                      className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300"
-                    />
-                    <label
-                      htmlFor="push-everything"
-                      className="ml-3 block text-sm font-medium text-gray-700"
-                    >
-                      Everything
-                    </label>
-                  </div>
-                  <div className="flex items-center">
-                    <input
-                      id="push-email"
-                      name="push-notifications"
-                      type="radio"
-                      className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300"
-                    />
-                    <label
-                      htmlFor="push-email"
-                      className="ml-3 block text-sm font-medium text-gray-700"
-                    >
-                      Same as email
-                    </label>
-                  </div>
-                  <div className="flex items-center">
-                    <input
-                      id="push-nothing"
-                      name="push-notifications"
-                      type="radio"
-                      className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300"
-                    />
-                    <label
-                      htmlFor="push-nothing"
-                      className="ml-3 block text-sm font-medium text-gray-700"
-                    >
-                      No push notifications
-                    </label>
-                  </div>
-                </div>
-              </fieldset>
-            </div>
-          </div>
+
         </div>
 
         <div>
           <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-            <div className="sm:col-span-4">
-              <label
-                htmlFor="username"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Username
-              </label>
-              <div className="mt-1 flex rounded-md shadow-sm">
-                <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
-                  workcation.com/
-                </span>
-                <input
-                  type="text"
-                  name="username"
-                  id="username"
-                  autoComplete="username"
-                  className="flex-1 focus:ring-blue-500 focus:border-blue-500 block w-full min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300"
-                />
-              </div>
-            </div>
-
-            <div className="sm:col-span-6">
-              <label
-                htmlFor="about"
-                className="block text-sm font-medium text-gray-700"
-              >
-                About
-              </label>
-              <div className="mt-1">
-                <textarea
-                  id="about"
-                  name="about"
-                  rows={3}
-                  className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border border-gray-300 rounded-md"
-                  defaultValue={""}
-                />
-              </div>
-              <p className="mt-2 text-sm text-gray-500">
-                Write a few sentences about yourself.
-              </p>
-            </div>
-
             <div className="sm:col-span-6">
               <label
                 htmlFor="photo"
@@ -845,20 +565,22 @@ const AdminAddCustomerPage = () => {
               </label>
               <div className="mt-1 flex items-center">
                 <span className="h-12 w-12 rounded-full overflow-hidden bg-gray-100">
-                  <svg
+                {/* <input type="file" name="service_image" size='lg' onChange={(e) => setProperty_image(e.target.files[0])} /> */}
+                  {/* <svg
                     className="h-full w-full text-gray-300"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
                     <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                  </svg>
+                  </svg> */}
                 </span>
-                <button
+                <input type="file" name="service_image" size='lg' onChange={(e) => setProperty_image(e.target.files[0])}  className="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"  />
+                {/* <button
                   type="button"
                   className="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 >
                   Change
-                </button>
+                </button> */}
               </div>
             </div>
 
@@ -867,7 +589,7 @@ const AdminAddCustomerPage = () => {
                 htmlFor="cover-photo"
                 className="block text-sm font-medium text-gray-700"
               >
-                Cover photo
+                Property photo
               </label>
               <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                 <div className="space-y-1 text-center">
@@ -897,6 +619,7 @@ const AdminAddCustomerPage = () => {
                         type="file"
                         className="sr-only"
                       />
+                      
                     </label>
                     <p className="pl-1">or drag and drop</p>
                   </div>
@@ -919,7 +642,7 @@ const AdminAddCustomerPage = () => {
             </button>
             <button
               type="submit"
-              onClick={addCustomer}
+              // onClick={addCustomer}
               className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
               Save

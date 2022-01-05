@@ -5,23 +5,36 @@ import { Link } from 'react-router-dom';
 
 const AdminServicePage = () => {
 
-  const { id } = useParams();
+  const { service_id } = useParams();
   const [service, setService] = useState('')
 
   useEffect(() => {
     async function fetchData() {
-      const request = await axios.get(`http://localhost:5001/api/service/${id}`)
-      console.log(request)
+
+      const request = await axios.get(`http://localhost:5001/api/service/${service_id}`)
+        //  const request = await axios.get('http://localhost:5001/api/service/4')
+      
       setService(request.data)
+      console.log(request)
       return request;
     }
     fetchData()
   }, [])// eslint-disable-line react-hooks/exhaustive-deps
 
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const request = await axios.get(`http://localhost:5001/api/customer/${customer_id}`)
+  //     setService(request.data)
+  //     return request;
+  //   }
+  //   fetchData()
+  // }, [customer_id])// eslint-disable-line react-hooks/exhaustive-deps
+  
 
-  const deleteService = (id) => {
-    axios.delete(`http://localhost:5001/api/service/delete/${id}`).then((response) =>{
-      console.log(service.id)
+
+  const deleteService = (service_id) => {
+    axios.delete(`http://localhost:5001/api/service/delete/${service_id}`).then((response) =>{
+      console.log(service.service_id)
     })
   }
  
@@ -29,17 +42,17 @@ const AdminServicePage = () => {
   return (
     <div>
       Service
-      {service.ServiceType}
-      {service.id}
+      {service.service_type}
+      {service.service_id}
 
       <div>
-      <p>{service.ServiceDescription}</p>
-      <p>{service.ServicePrice}</p>
+      <p>{service.service_description}</p>
+      <p>{service.service_price}</p>
         <div>
-          <Link rel="preconnect" to={`/service/edit/${id}`} >Edit</Link>
+          <Link rel="preconnect" to={`/service/edit/${service_id}`} >Edit</Link>
           {/* <Link></Link> */}
         </div>
-        <button onClick={(e) => deleteService(`${service.id}`)}>Delete</button>
+        <button onClick={(e) => deleteService(`${service.service_id}`)}>Delete</button>
       </div>
     </div>
   )

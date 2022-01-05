@@ -4,39 +4,38 @@ import { useParams } from "react-router";
 import { Link } from 'react-router-dom';
 
 const AdminCustomerPage = () => {
-const { Customer_ID } = useParams();
+const { customer_id } = useParams();
 const [customer, setCustomer] = useState([])
 
 useEffect(() => {
   async function fetchData() {
-    const request = await axios.get(`http://localhost:5001/api/customer/${Customer_ID}`)
-    setCustomer(request.data[0])
-    console.log(request.data[0])
+    const request = await axios.get(`http://localhost:5001/api/customer/${customer_id}`)
+    setCustomer(request.data)
     return request;
   }
   fetchData()
-}, [Customer_ID])// eslint-disable-line react-hooks/exhaustive-deps
+}, [customer_id])// eslint-disable-line react-hooks/exhaustive-deps
 
 
-const deleteCustomer = (Customer_ID) => {
-  axios.delete(`http://localhost:5001/api/customer/delete/${Customer_ID}`).then((response) =>{
+const deleteCustomer = (customer_id) => {
+  axios.delete(`http://localhost:5001/api/customer/delete/${customer_id}`).then((response) =>{
   })
 }
 
 
 
   return (
-    <div key={customer.Customer_ID}>
+    <div key={customer.customer_id}>
       <div>
         <h1>
           {customer.first_name} {customer.last_name}
         </h1>
       </div>
       <div className="d-flex text-center">
-        <Link to={`/admin/edit/customer/${customer.Customer_ID}`}>
+        <Link to={`/admin/edit/customer/${customer.customer_id}`}>
           Edit this customer
         </Link>
-        <button onClick={(e) => deleteCustomer(`${customer.Customer_ID}`)}>
+        <button onClick={(e) => deleteCustomer(`${customer.customer_id}`)}>
           Delete this customer
         </button>
       </div>

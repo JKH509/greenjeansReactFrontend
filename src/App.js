@@ -16,7 +16,7 @@ import AdminEditServicePage from './pages/admin/service_data/AdminEditServicePag
 import AdminServicesPage from './pages/admin/service_data/AdminServicesPage';
 import HomePage from './pages/home/HomePage';
 import ServicesPage from './pages/services/ServicesPage';
-import NotFound from './NotFound';
+// import NotFound from './NotFound';
 // import Footer from './shared/Footer';
 import Header from './shared/Header'
 import AdminServicePage from './pages/admin/service_data/AdminServicePage';
@@ -37,7 +37,7 @@ function App() {
         <Route path="/admin/customers" element={<AdminCustomersPage />} />
         {/* <Route path='/test' element={<AdminTest />} /> */}
         <Route
-          path="/admin/customer/:Customer_ID"
+          path="/admin/customer/:customer_id"
           element={<AdminCustomerPage />}
         />
         <Route
@@ -45,11 +45,11 @@ function App() {
           element={<AdminAddCustomerPage />}
         />
         <Route
-          path="/admin/edit/customer/:Customer_ID"
+          path="/admin/edit/customer/:customer_id"
           element={<AdminEditCustomerPage />}
         />
         <Route
-          path="/admin/customer/invoice/:Customer_ID"
+          path="/admin/customer/invoice/:customer_id"
           element={<AdminCustomerInvoicePage />}
         />
 
@@ -58,18 +58,18 @@ function App() {
 
 
         <Route path="/admin/employees" element={<AdminEmployeesPage />} />
-        <Route path="/admin/employee/:id" element={<AdminEmployeePage />} />
+        <Route path="/admin/employee/:employee_id" element={<AdminEmployeePage />} />
         <Route
           path="/admin/create/employee"
           element={<AdminAddNewEmployeePage />}
         />
         <Route
-          path="/admin/edit/employee/:id"
+          path="/admin/edit/employee/:employee_id"
           element={<AdminEditEmployeePage />}
         />
 
         <Route path="/admin/services" element={<AdminServicesPage />} />
-        <Route path="/admin/service/:id" element={<AdminServicePage />} />
+        <Route path="/admin/service/:service_id" element={<AdminServicePage />} />
         <Route path="/admin/create/service" element={<AdminAddServicePage />} />
         <Route
           path="/admin/edit/service/:id"
