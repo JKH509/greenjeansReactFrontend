@@ -70,7 +70,6 @@ function classNames(...classes) {
 
 const AdminEmployeePage = () => {
 
-
   const { employee_id } = useParams();
   const [employee, setEmployee] = useState('')
 
@@ -134,6 +133,10 @@ const AdminEmployeePage = () => {
                     <h1 className="text-2xl font-bold text-gray-900 truncate">{employee.first_name}{" "}{employee.last_name}</h1>
                   </div>
                 </div>
+              </div>
+
+              <div>
+                <Link to={`/admin/edit/employee/${employee.employee_id}`}>Edit employee</Link>
               </div>
 
               {/* Tabs */}
@@ -218,11 +221,11 @@ const AdminEmployeePage = () => {
                         <img className="h-10 w-10 rounded-full" src={person.imageUrl} alt="" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <a href="#" className="focus:outline-none">
+                        <Link to="#" className="focus:outline-none">
                           <span className="absolute inset-0" aria-hidden="true" />
                           <p className="text-sm font-medium text-gray-900">{person.name}</p>
                           <p className="text-sm text-gray-500 truncate">{person.role}</p>
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   ))}
@@ -230,16 +233,7 @@ const AdminEmployeePage = () => {
               </div>
             </article>
 
-
-
-
-     
   </>
-
-
-
-
-
 
 
     // <div>

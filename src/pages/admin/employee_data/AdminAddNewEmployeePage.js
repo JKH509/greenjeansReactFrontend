@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import axios from 'axios';
-import FileUpload from '../file_uploads/FileUpload';
+// import FileUpload from '../file_uploads/FileUpload';
 import { v4 as uuidv4 } from 'uuid';
 uuidv4();
 
@@ -117,7 +117,7 @@ const AdminAddNewEmployeePage = () => {
                 />
               </div>
             </div>
-
+{/* Employee last */}
             <div className="sm:col-span-3">
               <label
                 htmlFor="employeeLastName"
@@ -136,7 +136,7 @@ const AdminAddNewEmployeePage = () => {
                 />
               </div>
             </div>
-
+{/* email */}
             <div className="sm:col-span-3">
               <label
                 htmlFor="employeeEmail"
@@ -155,7 +155,7 @@ const AdminAddNewEmployeePage = () => {
                 />
               </div>
             </div>
-
+{/* phone */}
             <div className="sm:col-span-1">
               <label
                 htmlFor="employeePhone"
@@ -174,7 +174,7 @@ const AdminAddNewEmployeePage = () => {
                 />
               </div>
             </div>
-
+{/* mobile */}
             <div className="sm:col-span-1">
               <label
                 htmlFor="employeeMobile"
@@ -193,7 +193,7 @@ const AdminAddNewEmployeePage = () => {
                 />
               </div>
             </div>
-
+{/* gender */}
             <div className="sm:col-span-1">
               <label
                 htmlFor="employeeEmployeeGender"
@@ -201,21 +201,28 @@ const AdminAddNewEmployeePage = () => {
               >
                 Gender
               </label>
-              {/* Needs dropdown */}
               <div className="mt-1">
-                <input
+                {/* <input
                   type="text"
                   name="employeeEmployeeGender"
                   id="employeeEmployeeGender"
                   onChange={(e) => setEmployeeGender(e.target.value)}
                   className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                />
+                /> */}
+
+<select
+                    name="employeeGender"
+                    id="employeeGender"
+                   
+                    onChange={(e) => setEmployeeGender(e.target.value)}
+                    className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                  >
+                    <option>Male</option>
+                    <option>Female</option>
+                  </select>
               </div>
             </div>
-
-           
-
-
+{/* address */}
             <div className="sm:col-span-6">
               <label
                 htmlFor="employeeAddress"
@@ -234,7 +241,7 @@ const AdminAddNewEmployeePage = () => {
                 />
               </div>
             </div>
-
+{/* city */}
             <div className="sm:col-span-2">
               <label
                 htmlFor="employeeCity"
@@ -253,7 +260,7 @@ const AdminAddNewEmployeePage = () => {
                 />
               </div>
             </div>
-
+{/* state */}
             <div className="sm:col-span-2">
               <label
                 htmlFor="employeeState"
@@ -272,7 +279,7 @@ const AdminAddNewEmployeePage = () => {
                 />
               </div>
             </div>
-
+{/* zip */}
             <div className="sm:col-span-1">
               <label
                 htmlFor="employeeZip"
@@ -291,7 +298,7 @@ const AdminAddNewEmployeePage = () => {
                 />
               </div>
             </div>
-
+{/* country */}
             <div className="sm:col-span-1">
               <label
                 htmlFor="employeeCountry"
@@ -313,7 +320,7 @@ const AdminAddNewEmployeePage = () => {
                 </select>
               </div>
             </div>
-
+{/* medical */}
             <div className="sm:col-span-1">
               <label
                 htmlFor="employeeMedicalConditions"
@@ -331,7 +338,7 @@ const AdminAddNewEmployeePage = () => {
                 />
               </div>
             </div>
-
+{/* license */}
             <div className="sm:col-span-1">
               <label
                 htmlFor="employeeDriversLicenseStatus"
@@ -340,16 +347,29 @@ const AdminAddNewEmployeePage = () => {
                License Status
               </label>
               <div className="mt-1">
-                <input
+                {/* <input
                   type="text"
                   name="employeeDriversLicenseStatus"
                   id="employeeDriversLicenseStatus"
                   onChange={(e) => setEmployeeDriversLicenseStatus(e.target.value)}
                   className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                />
+                /> */}
+                  <select
+                    name="employeeDriversLicenseStatus"
+                    id="employeeDriversLicenseStatus"
+                    onChange={(e) => setEmployeeDriversLicenseStatus(e.target.value)}
+                    className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                  >
+                    <option>valid</option>
+                    <option>not-valid</option>
+                  </select>
+
+
+
+
               </div>
             </div>
-
+{/* last wage */}
             <div className="sm:col-span-1">
               <label
                 htmlFor="employeeLastWage"
@@ -367,7 +387,7 @@ const AdminAddNewEmployeePage = () => {
                 />
               </div>
             </div>
-
+{/* pay options */}
             <div className="sm:col-span-1">
               <label
                 htmlFor="employeePayPreference"
@@ -376,7 +396,7 @@ const AdminAddNewEmployeePage = () => {
                 Pay options
               </label>
               <div className="mt-1">
-                <input
+                {/* <input
                   type="text"
                   name="employeePayPreference"
                   id="employeePayPreference"
@@ -385,10 +405,27 @@ const AdminAddNewEmployeePage = () => {
                     setEmployeePayPreference(e.target.value)
                   }
                   className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                />
+                /> */}
+                <select
+                    name="employeePayPreference"
+                    id="employeePayPreference"
+                    onChange={(e) =>
+                 
+                      setEmployeePayPreference(e.target.value)
+                    }
+                    className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                  >
+                    <option>direct deposit</option>
+                    <option>Check</option>
+                  </select>
+
+
+
+
+
               </div>
             </div>
-
+{/* distance */}
             <div className="sm:col-span-1">
               <label
                 htmlFor="employeeDistance"
@@ -406,11 +443,7 @@ const AdminAddNewEmployeePage = () => {
                 />
               </div>
             </div>
-
-            
-
-           
-
+{/* ethnicity */}
             <div className="sm:col-span-1">
               <label
                 htmlFor="employeeEnd"
@@ -428,7 +461,7 @@ const AdminAddNewEmployeePage = () => {
                 />
               </div>
             </div>
-
+{/* notes */}
             <div className="sm:col-span-1">
               <label
                 htmlFor="employeeCautions"
@@ -446,27 +479,7 @@ const AdminAddNewEmployeePage = () => {
                 />
               </div>
             </div>
-
-        
-
-            {/* <div className="sm:col-span-1">
-              <label
-                htmlFor="employeePaymentType"
-                className="block text-sm font-medium text-gray-700"
-              >
-                employeePaymentType
-              </label>
-              <div className="mt-1">
-                <input
-                  type="text"
-                  name="employeePaymentType"
-                  id="employeePaymentType"
-                  // onChange={(e) => setEmployeePaymentType(e.target.value)}
-                  className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                />
-              </div>
-            </div> */}
-
+{/* job title */}
             <div className="sm:col-span-2">
               <label
                 htmlFor="employeeJobTitle"
@@ -484,7 +497,7 @@ const AdminAddNewEmployeePage = () => {
                 />
               </div>
             </div>
-
+{/* starting wage */}
             <div className="sm:col-span-2">
               <label
                 htmlFor="employeeStartingWage"
@@ -502,8 +515,6 @@ const AdminAddNewEmployeePage = () => {
                 />
               </div>
             </div>
-
-            
           </div>
         </div>
 </div>

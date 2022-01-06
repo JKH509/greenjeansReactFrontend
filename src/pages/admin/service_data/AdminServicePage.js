@@ -15,7 +15,7 @@ const AdminServicePage = () => {
         //  const request = await axios.get('http://localhost:5001/api/service/4')
       
       setService(request.data)
-      console.log(request)
+      // console.log(request)
       return request;
     }
     fetchData()
@@ -49,7 +49,7 @@ const AdminServicePage = () => {
       <p>{service.service_description}</p>
       <p>{service.service_price}</p>
         <div>
-          <Link rel="preconnect" to={`/service/edit/${service_id}`} >Edit</Link>
+          <Link rel="preconnect" to={`/admin/edit/service/${service_id}`} >Edit</Link>
           {/* <Link></Link> */}
         </div>
         <button onClick={(e) => deleteService(`${service.service_id}`)}>Delete</button>

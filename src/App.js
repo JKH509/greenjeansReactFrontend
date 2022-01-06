@@ -72,7 +72,7 @@ function App() {
         <Route path="/admin/service/:service_id" element={<AdminServicePage />} />
         <Route path="/admin/create/service" element={<AdminAddServicePage />} />
         <Route
-          path="/admin/edit/service/:id"
+          path="/admin/edit/service/:service_id"
           element={<AdminEditServicePage />}
         />
 
