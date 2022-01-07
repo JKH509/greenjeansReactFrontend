@@ -304,6 +304,8 @@ const Header = () => {
   //   </Transition>
   // </Popover>
   <nav>
+    <Link to='/'>{" "}Home{" "}|</Link>
+
     <Link to='/dashboard'>{" "}Dashboard{" "}</Link>
     {/* <Link to='/test'>{" "}Test{" "}</Link> */}
     <Link to='/admin/create/customer'>|{" "}Create customer{" "}</Link>
