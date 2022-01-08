@@ -5,9 +5,6 @@ import axios from 'axios'
 
 const AdminAddServicePage = () => {
 
-
- 
-
   const [ newServiceName, setNewServiceName ] = useState('')
   const [ newServiceDescription, setNewServiceDescription ] = useState('')
   const [ newServicePrice, setNewServicePrice ] = useState(0.0)
@@ -20,8 +17,6 @@ const AdminAddServicePage = () => {
   const [ newServiceSeasonWinterCheckBox, setNewServiceSeasonWinterCheckBox ] = useState('')
 
   const [ service_image, setServiceImage ] = useState('')
-
-  
   
   const addService = async (e) => {
     e.preventDefault();
@@ -41,33 +36,11 @@ const AdminAddServicePage = () => {
     axios.post("http://localhost:5001/api/service/add-service", formData);
   };
 
-     // axios.post('http://localhost:5001/api/service/add-service', {
-    //   service_type: newServiceName, 
-    //   service_description: newServiceDescription,
-    //   service_price: newServicePrice, 
-    //   service_warranty: newServiceWarranty, 
-    //   warranty_description: newServiceWarrantyDescription, 
-    //   service_season_spring: newServiceSeasonSpringCheckBox, 
-    //   service_season_summer: newServiceSeasonSummerCheckBox, 
-    //   service_season_fall: newServiceSeasonFallCheckBox, 
-    //   service_season_winter: newServiceSeasonWinterCheckBox, 
-    // })
-   // newServiceSeasonAllCheckBox: newServiceSeasonAllCheckBox,
-
-
-
-
-
-  
-
-
-
   return (
     <form
       className="space-y-8 divide-y divide-gray-200 container"
       onSubmit={addService}
       method="POST"
-      // action="/profile-upload-single"
        encType='multipart/form-data'
     >
       <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">

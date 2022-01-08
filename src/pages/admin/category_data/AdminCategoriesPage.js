@@ -1,67 +1,64 @@
-import React,{useState, useEffect} from 'react'
+import React,  {useState, useEffect} from 'react'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const AdminServicesPage = () => {
+const AdminCategoriesPage = () => {
 
-
-  const [services, setServices] = useState([])
+  const [ categories, setCategory ] = useState([])
 
   useEffect(() => {
     async function fetchData() {
-      const request = await axios.get('http://localhost:5001/api/services/list')
-      setServices(request.data)
+      const request = await axios.get('http://localhost:5001/api/categories/list')
+       setCategory(request.data)
       console.log(request.data)
       return request;
     }
     fetchData()
   }, []);// eslint-disable-line react-hooks/exhaustive-deps
 
-  return (
+  const click = () => {
+    alert('clicked')
+  }
 
+  return (
     <div className="bg-white">
       <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
         <h2 className="sr-only">Products</h2>
 
-        <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-3 lg:gap-x-8">
-          {services.map((product) => (
+        <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-2 lg:gap-x-8">
+          {categories.map((product) => (
             <div
-              key={product.service_id}
+              key={product.category_id}
               className="group relative bg-white border border-gray-200 rounded-lg flex flex-col overflow-hidden"
             >
               <div className="aspect-w-3 aspect-h-4 bg-gray-200 group-hover:opacity-75 sm:aspect-none sm:h-96">
                 <img
-                  src={`http://localhost:5001/${product.service_image}`}
+                  src={`http://localhost:5001/${product.category_image}`}
                   
-                  alt={product.imageAlt}
+                  alt={product.category_name}
                   className="w-full h-full object-center object-cover sm:w-full sm:h-full"
                 />
               </div>
               <div className="flex-1 p-4 space-y-2 flex flex-col">
                 <h3 className="text-sm font-medium text-gray-900">
-                  <a href={product.href}>
+                  <Link to={`/admin/category/${product.category_id}`}>
                     <span aria-hidden="true" className="absolute inset-0" />
-                    {product.service_type}
-                  </a>
+                    {product.category_name === 'Snow' ? <>{product.category_name}</> : <>{product.category_name}'s</>}
+                    {/* {product.category_name} */}
+                  </Link>
                 </h3>
-                <p className="text-sm text-gray-500">{product.service_description}</p>
+                <p className="text-sm text-gray-500">{product.category_description}</p>
                 <div className="flex-1 flex flex-col justify-end">
-                  <p className="text-sm italic text-gray-500">{product.options}</p>
-                  <p className="text-base font-medium text-gray-900">Starts at just ${product.service_price}</p>
-                </div>
-                <div className="flex-1 flex flex-col object-center">
-                  {/* <p className="text-sm italic text-gray-500"> */}
-                  <Link to={`/${product.service_type}`}>Learn more</Link>
-                    {/* </p> */}
+                  <p className="text-sm italic text-gray-500">{product.category_season}</p>
                 </div>
               </div>
             </div>
           ))}
         </div>
+       
       </div>
     </div>
-
   )
 }
 
-export default AdminServicesPage
+export default AdminCategoriesPage

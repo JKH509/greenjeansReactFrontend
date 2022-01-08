@@ -21,6 +21,14 @@ import ServicesPage from './pages/services/ServicesPage';
 import Header from './shared/Header'
 import AdminServicePage from './pages/admin/service_data/AdminServicePage';
 import EmployeeProfile from './pages/profiles/EmployeeProfile';
+import Lawns from './pages/services/lawn/Lawns';
+import FertilizerPage from './pages/services/fertilizer/FertilizerPage';
+import Snow from './pages/services/snow/Snow';
+import AdminCategoriesPage from './pages/admin/category_data/AdminCategoriesPage';
+import AdminAddCategory from './pages/admin/category_data/AdminAddCategory';
+import AdminEditCategory from './pages/admin/category_data/AdminEditCategory';
+import AdminCategoryPage from './pages/admin/category_data/AdminCategoryPage';
+
 
 
 function App() {
@@ -28,12 +36,21 @@ function App() {
     <div>
       <Header />
       <Routes>
+{/* client facing */}
         <Route path="/" element={<HomePage />} />
-
         <Route path="/services" element={<ServicesPage />} />
+        <Route path="/lawns" element={<Lawns />} />
+        <Route path="/fertilizer" element={<FertilizerPage />} />
+        <Route path="/snow" element={<Snow />} />
 
+{/* profiles */}
+        <Route path="/profile" element={<EmployeeProfile />} />
+
+
+{/* admin facing */}
         <Route path="/dashboard" element={<Dashboard />} />
 
+{/* customers */}
         <Route path="/admin/customers" element={<AdminCustomersPage />} />
         {/* <Route path='/test' element={<AdminTest />} /> */}
         <Route
@@ -53,10 +70,7 @@ function App() {
           element={<AdminCustomerInvoicePage />}
         />
 
-        <Route path="/profile" element={<EmployeeProfile />} />
-
-
-
+{/* employees */}
         <Route path="/admin/employees" element={<AdminEmployeesPage />} />
         <Route path="/admin/employee/:employee_id" element={<AdminEmployeePage />} />
         <Route
@@ -68,6 +82,7 @@ function App() {
           element={<AdminEditEmployeePage />}
         />
 
+{/* services */}
         <Route path="/admin/services" element={<AdminServicesPage />} />
         <Route path="/admin/service/:service_id" element={<AdminServicePage />} />
         <Route path="/admin/create/service" element={<AdminAddServicePage />} />
@@ -75,6 +90,12 @@ function App() {
           path="/admin/edit/service/:service_id"
           element={<AdminEditServicePage />}
         />
+
+{/* categories */}
+        <Route path="/admin/categories" element={<AdminCategoriesPage />} />
+        <Route path="/admin/category/:category_id" element={<AdminCategoryPage />} />
+        <Route path="/admin/create/category" element={<AdminAddCategory />} />
+        <Route path="/admin/edit/category/:category_id" element={<AdminEditCategory />} />
 
         {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>
