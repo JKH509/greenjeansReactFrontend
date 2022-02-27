@@ -1,6 +1,7 @@
 import React,  {useState, useEffect} from 'react'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+// import { API_BASE_URL } from '../../../utilities/Constants'
 
 const AdminCategoriesPage = () => {
 
@@ -8,7 +9,7 @@ const AdminCategoriesPage = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const request = await axios.get('http://localhost:5001/api/categories/list')
+      const request = await axios.get('https://node.greenjeans509.com/api/categories/list')
        setCategory(request.data)
       console.log(request.data)
       return request;
@@ -33,7 +34,7 @@ const AdminCategoriesPage = () => {
             >
               <div className="aspect-w-3 aspect-h-4 bg-gray-200 group-hover:opacity-75 sm:aspect-none sm:h-96">
                 <img
-                  src={`http://localhost:5001/${product.category_image}`}
+                  src={`https://node.greenjeans509.com/${product.category_image}`}
                   
                   alt={product.category_name}
                   className="w-full h-full object-center object-cover sm:w-full sm:h-full"

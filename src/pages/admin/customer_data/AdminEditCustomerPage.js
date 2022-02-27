@@ -1,27 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { useParams } from 'react-router'
+// import { API_BASE_URL } from '../../../utilities/Constants'
 
 const AdminEditCustomerPage = () => {
 const {customer_id} = useParams();
 // const [ customer, setCustomer ] = useState('')
 
-// useEffect(() => {
-//   async function fetchData() {
-//     const request = await axios.get(`http://localhost:5001/api/customer/${customer_id}`)
-//     setCustomer(request.data)
-//     return request;
-//   }
-//   fetchData()
-// // eslint-disable-next-line react-hooks/exhaustive-deps
-// }, [])
-
-
-
   const [ customerFirstName ,setCustomerFirstName ] = useState('')
   const [ customerLastName ,setCustomerLastName ] = useState('')
   const [ customerEmail , setCustomerEmail ] = useState('')
-  // const [ customerDow , setCustomerDow ] = useState('')
   const [ customerPhone ,setCustomerPhone ] = useState('')
   const [ customerMobile ,setCustomerMobile ] = useState('')
 
@@ -47,9 +35,9 @@ const {customer_id} = useParams();
 
 useEffect(() => {
   const getDataById = async () => {
-    const {data} = await axios.get(`http://localhost:5001/api/customer/${customer_id}`)
-    // const request = await axios.get(`http://localhost:5001/api/customer/${customer_id}`)
-    console.log(data)
+    
+    const {data} = await axios.get(`https://node.greenjeans509.com/api/customer/${customer_id}`)
+    // console.log(data)
 
     setCustomerFirstName(data.first_name)
     setCustomerLastName(data.last_name)
@@ -76,10 +64,7 @@ getDataById()
 // eslint-disable-next-line react-hooks/exhaustive-deps
 },[])
 
-// setCustomerCountry(data.ethnicity)
-// setCustomerCautions(data.notes)
-// license_status: customerDriversLicenseStatus, 
-      // med_conditions: customerMedicalConditions,
+
 
 const updateHandler = async (e) => {
 
@@ -106,8 +91,8 @@ const updateHandler = async (e) => {
     notes: customerNotes,
     preferred_payment_method: customerPaymentType,
   };
-
-  await axios.put(`http://localhost:5001/api/customer/edit/${customer_id}`, data)
+  
+  await axios.put(`https://node.greenjeans509.com/api/customer/edit/${customer_id}`, data)
   // history.push('/services')
 }
 

@@ -3,6 +3,7 @@ import axios from 'axios';
 import ReactPaginate from 'react-paginate';
 // import { useDispatch} from 'react-redux';
 import { Link } from 'react-router-dom';
+// import API_BASE_URL from '../../../utilities/Constants'
 
 const AdminCustomersPage = () => {
 
@@ -17,7 +18,8 @@ const AdminCustomersPage = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const request = await axios.get('http://localhost:5001/api/customers/list')
+      const request = await axios.get('https://node.greenjeans509.com/api/customers/list')
+      // const request = await axios.get(`${API_BASE_URL}/api/customers/list`)
       setCustomers(request.data)
       return request;
     }
@@ -48,7 +50,9 @@ const AdminCustomersPage = () => {
              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                {customer.phone_number}
              </td>
-             <td><img src={`http://localhost:5001/${customer.property_image}`} alt={customer.customer_id} /></td>
+             
+             <td><img src={`https://node.greenjeans509.com/${customer.property_image}`} alt={customer.customer_id} /></td>
+            
              <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                <Link to={`/admin/customer/${customer.customer_id}`} className="text-blue-600 hover:text-blue-900">
                  View

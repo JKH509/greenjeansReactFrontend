@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
+// import { API_BASE_URL } from '../../../utilities/Constants'
 
 import InvoiceTables from "../admin_components/InvoiceTables";
 
@@ -12,7 +13,8 @@ const AdminCustomerPage = () => {
   useEffect(() => {
     async function fetchData() {
       const request = await axios.get(
-        `http://localhost:5001/api/customer/${customer_id}`
+        
+        `https://node.greenjeans509.com/api/customer/${customer_id}`
       );
       setCustomer(request.data);
       return request;
@@ -20,11 +22,12 @@ const AdminCustomerPage = () => {
     fetchData();
   }, [customer_id]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const deleteCustomer = (customer_id) => {
-    axios
-      .delete(`http://localhost:5001/api/customer/delete/${customer_id}`)
-      .then((response) => {});
-  };
+  // const deleteCustomer = (customer_id) => {
+  //   axios
+  //     .delete(`https://node.greenjeans509.com/api/customer/delete/${customer_id}`)
+  //     // .delete(`http://localhost:5001/api/customer/delete/${customer_id}`)
+  //     .then((response) => {});
+  // };
 
   return (
     <div className="bg-white shadow overflow-hidden sm:rounded-lg container">

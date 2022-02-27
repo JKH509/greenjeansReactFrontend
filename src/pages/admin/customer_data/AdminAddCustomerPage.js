@@ -1,6 +1,7 @@
 import React,{ useState, useEffect } from 'react'
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
+// import Constants from '../../../utilities/Constants'
 
 uuidv4();
 // import DayOfWeekRadio from '../admin_components/DayOfWeekRadio';
@@ -51,12 +52,12 @@ const AdminAddCustomerPage = () => {
     formData.append("notes", customerNotes);
     formData.append("property_image", property_image);
     formData.append("preferred_payment_method", customerPaymentType);
-
-    axios.post("http://localhost:5001/api/customer/add-customer", formData);
+    
+    axios.post('https://node.greenjeans509.com/api/customer/add-customer', formData);
   };
 
 
-  const [ uuid, setUuid ] = useState(uuidv4())
+  const [ uuid ] = useState(uuidv4())
   const [ customerFirstName ,setCustomerFirstName ] = useState('')
   const [ customerLastName ,setCustomerLastName ] = useState('')
   const [ customerEmail , setCustomerEmail ] = useState('')

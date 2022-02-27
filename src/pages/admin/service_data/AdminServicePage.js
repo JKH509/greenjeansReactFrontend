@@ -2,6 +2,7 @@ import React,{useState, useEffect} from 'react'
 import axios from 'axios';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
+// import { API_BASE_URL } from '../../../utilities/Constants'
 
 const AdminServicePage = () => {
 
@@ -10,30 +11,17 @@ const AdminServicePage = () => {
 
   useEffect(() => {
     async function fetchData() {
-
-      const request = await axios.get(`http://localhost:5001/api/service/${service_id}`)
-        //  const request = await axios.get('http://localhost:5001/api/service/4')
-      
+      const request = await axios.get(`https://node.greenjeans509.com/api/service/${service_id}`)
       setService(request.data)
-      // console.log(request)
       return request;
     }
     fetchData()
   }, [])// eslint-disable-line react-hooks/exhaustive-deps
-
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const request = await axios.get(`http://localhost:5001/api/customer/${customer_id}`)
-  //     setService(request.data)
-  //     return request;
-  //   }
-  //   fetchData()
-  // }, [customer_id])// eslint-disable-line react-hooks/exhaustive-deps
   
 
 
   const deleteService = (service_id) => {
-    axios.delete(`http://localhost:5001/api/service/delete/${service_id}`).then((response) =>{
+    axios.delete(`https://node.greenjeans509.com/api/service/delete/${service_id}`).then((response) =>{
       console.log(service.service_id)
     })
   }

@@ -1,5 +1,7 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { AuthContext } from './helpers/AuthContext';
+import axios from 'axios'
 import AdminAddCustomerPage from './pages/admin/customer_data/AdminAddCustomerPage';
 import AdminCustomerInvoicePage from './pages/admin/customer_data/AdminCustomerInvoicePage';
 import AdminCustomerPage from './pages/admin/customer_data/AdminCustomerPage';
@@ -15,7 +17,7 @@ import AdminAddServicePage from './pages/admin/service_data/AdminAddServicePage'
 import AdminEditServicePage from './pages/admin/service_data/AdminEditServicePage';
 import AdminServicesPage from './pages/admin/service_data/AdminServicesPage';
 import HomePage from './pages/home/HomePage';
-import ServicesPage from './pages/services/ServicesPage';
+// import ServicesPage from './pages/services/ServicesPage';
 // import NotFound from './NotFound';
 // import Footer from './shared/Footer';
 import Header from './shared/Header'
@@ -28,18 +30,85 @@ import AdminCategoriesPage from './pages/admin/category_data/AdminCategoriesPage
 import AdminAddCategory from './pages/admin/category_data/AdminAddCategory';
 import AdminEditCategory from './pages/admin/category_data/AdminEditCategory';
 import AdminCategoryPage from './pages/admin/category_data/AdminCategoryPage';
+import CategoryPage from './pages/services/category/CategoryPage';
+import LoginPage from './LoginSignup/LoginPage';
+import RegisterPage from './LoginSignup/RegisterPage';
+import ProfilesPage from './pages/profiles/ProfilesPage';
+import ClientProfilePage from './pages/clients/ClientProfilePage';
+// import Constants  from './utilities/Constants'
 
 
 
 function App() {
+//  const [isAdmin, setIsAdmin] = (false);
+
+const location = useLocation()
+  
+const [ authState, setAuthState ] = useState({userName: "", id: 0, status: false})
+// const [ isAdmin, setIsAdmin ] = useState(false)
+const [ id, setId ] =useState("")
+
+useEffect(() => {
+  axios.get('https://node.greenjeans509.com/api/auth', {
+      headers: {
+        accessToken: sessionStorage.getItem("accessToken"),
+      },
+    })
+    .then((response) => {
+      if (response.data.error) {
+        setAuthState({...authState, status: false});
+      } else {
+        setAuthState({
+          userName: response.data.userName, 
+          id: response.data.id, 
+          status: true
+        });
+        setId(id)
+      }
+    });
+// eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
+
+
   return (
     <div>
-      <Header />
+      <AuthContext.Provider value={{ authState, setAuthState }}>
+      {location.pathname === "/login" || location.pathname === "/sign-up" || location.pathname === "/dashboard" ? (
+          ""
+        ) : (
+          <Header />
+        )}
       <Routes>
 {/* client facing */}
         <Route path="/" element={<HomePage />} />
-        <Route path="/services" element={<ServicesPage />} />
-        <Route path="/lawns" element={<Lawns />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        
+        {authState.id % 2 ? 
+        <Route path="/profile/:username" element={<EmployeeProfile />}
+        />  
+        : 
+        // <Route path="/profile/:username" element={<ClientProfilePage />} 
+        <Route path="/profile/:username" element={<ProfilesPage />} 
+        /> }
+        
+         {/* <Route path="/profile/:username" element={<ProfilesPage />} /> */}
+        {/* This does work, I don't know if I should use this instead of the above?  */}
+        
+        {/* <Route path={`/profile/:${authState.userName}`} element={<ProfilesPage />} /> */}
+
+        {/* <Route path="/client-profile" element={<ProfilesPage />} /> */}
+        {/* <Route path="/client-profile" element={ authState.userName !== "James" ? <ClientProfilePage /> : <ProfilesPage /> } /> */}
+        
+        {/* {username === "James" && <Redirect to="/client-profile" />} */}
+        {/* <Route path="/client-profile/:username" element={<ProfilesPage />} /> */}
+
+
+
+        {/* <Route path="/categories" element={<CategoryPage />} /> */}
+        <Route path="/services" element={<CategoryPage />} />
+        {/* <Route path="/services/:service_id" element={<CategoryPage />} /> */}
+        <Route path="/lawn" element={<Lawns />} />
         <Route path="/fertilizer" element={<FertilizerPage />} />
         <Route path="/snow" element={<Snow />} />
 
@@ -48,11 +117,16 @@ function App() {
 
 
 {/* admin facing */}
-        <Route path="/dashboard" element={<Dashboard />} />
+{authState.id !== 1 ?  <Route path="/dashboard" element={<Dashboard />} /> : <Route path="/" element={<HomePage />} /> }
+        
 
 {/* customers */}
-        <Route path="/admin/customers" element={<AdminCustomersPage />} />
+{/* {isAdmin === true ? <Route path="/admin/customers" element={<AdminCustomersPage />} /> : '' } */}
+ <Route path="/admin/customers" element={<AdminCustomersPage />} />
+        
+
         {/* <Route path='/test' element={<AdminTest />} /> */}
+
         <Route
           path="/admin/customer/:customer_id"
           element={<AdminCustomerPage />}
@@ -100,6 +174,7 @@ function App() {
         {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>
       {/* <Footer /> */}
+      </AuthContext.Provider>
     </div>
   );
 }

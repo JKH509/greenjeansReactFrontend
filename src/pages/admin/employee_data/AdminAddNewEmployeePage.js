@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+// import { API_BASE_URL } from '../../../utilities/Constants'
 import axios from 'axios';
 // import FileUpload from '../file_uploads/FileUpload';
 import { v4 as uuidv4 } from 'uuid';
@@ -34,12 +35,12 @@ const AdminAddNewEmployeePage = () => {
     formData.append("employeeCautions", employeeCautions);
     formData.append("employee_image", employee_image);
     formData.append("employeePayPreference", employeePayPreference);
-
-    axios.post("http://localhost:5001/api/employee/add-employee", formData);
+    
+    axios.post('https://node.greenjeans509.com/api/employee/add-employee', formData);
   };
 
 
-  const [ uuid, setUuid ] = useState(uuidv4())
+  const [ uuid ] = useState(uuidv4())
   const [ employeeFirstName ,setEmployeeFirstName ] = useState('')
   const [ employeeLastName ,setEmployeeLastName ] = useState('')
   const [ employeePhone ,setEmployeePhone ] = useState('')

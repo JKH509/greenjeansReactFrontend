@@ -2,6 +2,7 @@ import React,{useState, useEffect} from 'react'
 import axios from 'axios';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
+// import { API_BASE_URL } from '../../../utilities/Constants'
 
 const AdminCategoryPage = () => {
 
@@ -10,7 +11,7 @@ const AdminCategoryPage = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const request = await axios.get(`http://localhost:5001/api/category/${category_id}`)
+      const request = await axios.get(`https://node.greenjeans509.com/api/category/${category_id}`)
         setCategory(request.data)
       return request;
     }
@@ -24,7 +25,7 @@ const AdminCategoryPage = () => {
       {category.category_name}
       <br/>
       <div>
-        <img className='img-fluid' src={`http://localhost:5001/${category.category_image}`} style={{width:'350px'}} alt={category.category_name} />
+        <img className='img-fluid' src={`https://node.greenjeans509.com/${category.category_image}`} style={{width:'350px'}} alt={category.category_name} />
       </div>
 
       <div>

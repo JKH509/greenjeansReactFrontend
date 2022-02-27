@@ -1,7 +1,8 @@
 import React,{useState, useEffect} from 'react'
 import axios from 'axios';
 import { useParams } from 'react-router';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+// import { API_BASE_URL } from '../../../utilities/Constants'
 
 const AdminEditCategory = () => {
 
@@ -14,7 +15,7 @@ const AdminEditCategory = () => {
 
   useEffect(() => {
     const getDataById = async () => {
-      const {data} = await axios.get(`http://localhost:5001/api/category/${category_id}`)
+      const {data} = await axios.get(`https://node.greenjeans509.com/api/category/${category_id}`)
   
       setCategoryName(data.category_name)
       setCategoryDescription(data.category_description)
@@ -35,7 +36,7 @@ const AdminEditCategory = () => {
       category_price: categorySeason, 
     }
   
-    await axios.put(`http://localhost:5001/api/category/${category_id}`, data)
+    await axios.put(`https://node.greenjeans509.com/api/category/${category_id}`, data)
     // history.push('/services')
   }
 

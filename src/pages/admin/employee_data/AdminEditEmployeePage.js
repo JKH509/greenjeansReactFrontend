@@ -1,23 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios';
 import { useParams } from 'react-router';
+// import { API_BASE_URL } from '../../../utilities/Constants'
 
 
 const AdminEditEmployeePage = () => {
   const { employee_id } = useParams();
   // const [employee, setEmployee] = useState('')
 
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const request = await axios.get(`http://localhost:5001/api/employee/${employee_id}`)
-  //     setEmployee(request.data)
-  //     console.log(request.data)
-  //     return request;
-  //   }
-  //   fetchData()
-  // }, [])// eslint-disable-line react-hooks/exhaustive-deps
-
-  //  const [ uuid, setUuid ] = useState(uuidv4())
   const [ employeeFirstName ,setEmployeeFirstName ] = useState('')
   const [ employeeLastName ,setEmployeeLastName ] = useState('')
   const [ employeePhone ,setEmployeePhone ] = useState('')
@@ -47,7 +37,7 @@ const AdminEditEmployeePage = () => {
 
   useEffect(() => {
     const getDataById = async () => {
-      const {data} = await axios.get(`http://localhost:5001/api/employee/${employee_id}`)
+      const {data} = await axios.get(`https://node.greenjeans509.com/api/employee/${employee_id}`)
       console.log(data)
 
       setEmployeeFirstName(data.first_name)
@@ -107,7 +97,7 @@ const AdminEditEmployeePage = () => {
         preferred_payment_method: employeePayPreference, 
     }
   
-    await axios.put(`http://localhost:5001/api/employee/edit/${employee_id}`, data)
+    await axios.put(`https://node.greenjeans509.com/api/employee/edit/${employee_id}`, data)
     // history.push('/services')
   }
 

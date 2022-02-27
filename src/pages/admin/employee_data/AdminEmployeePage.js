@@ -2,6 +2,7 @@ import React,{ useState, useEffect,  Fragment} from 'react';
 import axios from 'axios';
 import { useParams } from "react-router";
 import { Link } from 'react-router-dom';
+// import { API_BASE_URL } from '../../../utilities/Constants'
 
 import { MailIcon, PhoneIcon } from '@heroicons/react/solid'
 
@@ -75,7 +76,7 @@ const AdminEmployeePage = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const request = await axios.get(`http://localhost:5001/api/employee/${employee_id}`)
+      const request = await axios.get(`https://node.greenjeans509.com/api/employee/${employee_id}`)
       setEmployee(request.data)
       console.log(request.data)
       return request;
@@ -85,7 +86,7 @@ const AdminEmployeePage = () => {
 
   
   const deleteEmployee = (employee_id) => {
-    axios.delete(`http://localhost:5001/api/employee/delete/${employee_id}`).then((response) =>{
+    axios.delete(`https://node.greenjeans509.com/api/employee/delete/${employee_id}`).then((response) =>{
       // console.log(customer.Customer_ID)
     })
   }

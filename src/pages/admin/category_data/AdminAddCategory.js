@@ -1,5 +1,6 @@
 import React, {useState } from 'react'
 import axios from 'axios'
+// import { API_BASE_URL } from '../../../utilities/Constants'
 
 const AdminAddCategory = () => {
 
@@ -19,7 +20,7 @@ const AdminAddCategory = () => {
     formData.append("category_season", categorySeason);
     formData.append("category_image", category_image);
 
-    axios.post("http://localhost:5001/api/category/add-category", formData);
+    axios.post('https://node.greenjeans509.com/api/category/add-category', formData);
   };
 
 

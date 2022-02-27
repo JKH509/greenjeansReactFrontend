@@ -1,5 +1,6 @@
 {
   "name": "greenjeans509",
+  "homepage": "https://greenjeans509.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -33,7 +34,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "proxy": "http://localhost:5001/",
+  "proxy": "https://node.greenjeans509.com",
   "browserslist": {
     "production": [
       ">0.2%",
