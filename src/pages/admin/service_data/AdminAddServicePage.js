@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-// import { API_BASE_URL } from '../../../utilities/Constants'
+import { Constants } from '../../../utilities/Constants'
 
 
 
@@ -34,7 +34,7 @@ const AdminAddServicePage = () => {
     formData.append("service_season_winter", newServiceSeasonWinterCheckBox);
     formData.append("service_image", service_image);
 
-    axios.post('https://node.greenjeans509.com/api/service/add-service', formData);
+    axios.post(`${Constants.url.API_ADD_SERVICE}`, formData);
   };
 
   return (

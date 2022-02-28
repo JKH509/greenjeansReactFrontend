@@ -2,7 +2,7 @@ import React,{useState, useEffect} from 'react'
 import axios from 'axios';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
-// import { API_BASE_URL } from '../../../utilities/Constants'
+import { Constants } from '../../../utilities/Constants'
 
 const AdminServicePage = () => {
 
@@ -11,7 +11,7 @@ const AdminServicePage = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const request = await axios.get(`https://node.greenjeans509.com/api/service/${service_id}`)
+      const request = await axios.get(`${Constants.url.API_SERVICE_BY_ID}/${service_id}`)
       setService(request.data)
       return request;
     }
@@ -21,8 +21,8 @@ const AdminServicePage = () => {
 
 
   const deleteService = (service_id) => {
-    axios.delete(`https://node.greenjeans509.com/api/service/delete/${service_id}`).then((response) =>{
-      console.log(service.service_id)
+    axios.delete(`${Constants.url.API_DELETE_SERVICE}/${service_id}`).then((response) =>{
+      // console.log(service.service_id)
     })
   }
  

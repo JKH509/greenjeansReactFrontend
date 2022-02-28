@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios';
 import { useParams } from 'react-router';
-// import { API_BASE_URL } from '../../../utilities/Constants'
+import { Constants } from '../../../utilities/Constants'
 
 
 const AdminEditEmployeePage = () => {
@@ -37,7 +37,7 @@ const AdminEditEmployeePage = () => {
 
   useEffect(() => {
     const getDataById = async () => {
-      const {data} = await axios.get(`https://node.greenjeans509.com/api/employee/${employee_id}`)
+      const {data} = await axios.get(`${Constants.url.API_EMPLOYEE_BY_ID}/${employee_id}`)
       console.log(data)
 
       setEmployeeFirstName(data.first_name)
@@ -97,7 +97,7 @@ const AdminEditEmployeePage = () => {
         preferred_payment_method: employeePayPreference, 
     }
   
-    await axios.put(`https://node.greenjeans509.com/api/employee/edit/${employee_id}`, data)
+    await axios.put(`${Constants.url.API_EDIT_EMPLOYEE_BY_ID}/${employee_id}`, data)
     // history.push('/services')
   }
 

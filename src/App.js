@@ -34,8 +34,8 @@ import CategoryPage from './pages/services/category/CategoryPage';
 import LoginPage from './LoginSignup/LoginPage';
 import RegisterPage from './LoginSignup/RegisterPage';
 import ProfilesPage from './pages/profiles/ProfilesPage';
-import ClientProfilePage from './pages/clients/ClientProfilePage';
-// import Constants  from './utilities/Constants'
+// import ClientProfilePage from './pages/clients/ClientProfilePage';
+import {Constants}  from './utilities/Constants'
 
 
 
@@ -49,7 +49,7 @@ const [ authState, setAuthState ] = useState({userName: "", id: 0, status: false
 const [ id, setId ] =useState("")
 
 useEffect(() => {
-  axios.get('https://node.greenjeans509.com/api/auth', {
+    axios.get(`${Constants.url.API_AUTH}`, {
       headers: {
         accessToken: sessionStorage.getItem("accessToken"),
       },

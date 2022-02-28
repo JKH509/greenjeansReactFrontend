@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useContext } from 'react';
+import React, { Fragment,  useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import { AuthContext } from '../helpers/AuthContext';
 import {  useNavigate } from 'react-router';
@@ -70,25 +70,21 @@ function classNames(...classes) {
 const Header = () => {
 
   const authState = useContext(AuthContext)
-  // setAuthState({userName: response.data.userName, id: response.data.id, status:true})
 
   const location = useLocation()
-
-  // const [ userlogStatus, setUserlogStatus ] = useState(false)
   let navigate = useNavigate();
-  
+
   
   const login = async (e) => {
     e.preventDefault();
-    // setUserlogStatus(true);
     navigate("/login");
   };
 
-  const logOut = async (e) => {
-    e.preventDefault();
-    // window.localStorage.clear();
+  const logOut = async () => {
     sessionStorage.removeItem("accessToken");
-    navigate("/");
+    window.sessionStorage.clear();
+    navigate("/")
+    window.location.reload();
   };
 
 
@@ -244,6 +240,14 @@ const Header = () => {
               Docs
             </Link>
 
+            {authState.authState.id !== 1 && <Link
+              to="/dashboard"
+              className="text-base font-medium text-gray-500 hover:text-gray-900"
+            >
+              dashboard
+            </Link>}
+            
+
             <Popover className="relative">
               {({ open }) => (
                 <>
@@ -253,7 +257,8 @@ const Header = () => {
                       "group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     )}
                   >
-                    <span>More</span>
+                    {authState.authState.id !== 1 ? <span>More</span> : <span>Admin</span>}
+                    
                     <ChevronDownIcon
                       className={classNames(
                         open ? "text-gray-600" : "text-gray-400",
@@ -277,6 +282,10 @@ const Header = () => {
                         <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
                           {/* {resources.map((item) => ( */}
                           {/* <Link key={item.name} href={item.href} className="-m-3 p-3 block rounded-md hover:bg-gray-50"> */}
+                          
+                          {/* {authState.authState.id === */}
+                          {authState.authState.id === 1 ?
+                          <>
                           <Link
                             to="/admin/customers"
                             className="-m-3 p-2 block rounded-md hover:bg-gray-50"
@@ -344,8 +353,9 @@ const Header = () => {
                               Add Category
                             </p>
                           </Link>
-
-                          {/* ))} */}
+                          </> : ""
+                        }
+                          {/* /* ))} */ }
                         </div>
                       </div>
                     </Popover.Panel>

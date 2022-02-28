@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
-// import { API_BASE_URL } from '../../../utilities/Constants'
 import axios from 'axios';
 // import FileUpload from '../file_uploads/FileUpload';
 import { v4 as uuidv4 } from 'uuid';
+import { Constants } from '../../../utilities/Constants'
 uuidv4();
 
 
@@ -36,7 +36,7 @@ const AdminAddNewEmployeePage = () => {
     formData.append("employee_image", employee_image);
     formData.append("employeePayPreference", employeePayPreference);
     
-    axios.post('https://node.greenjeans509.com/api/employee/add-employee', formData);
+    axios.post(`${Constants.url.API_ADD_EMPLOYEE}`, formData);
   };
 
 

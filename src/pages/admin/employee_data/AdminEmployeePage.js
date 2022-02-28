@@ -2,7 +2,7 @@ import React,{ useState, useEffect,  Fragment} from 'react';
 import axios from 'axios';
 import { useParams } from "react-router";
 import { Link } from 'react-router-dom';
-// import { API_BASE_URL } from '../../../utilities/Constants'
+import { Constants } from '../../../utilities/Constants'
 
 import { MailIcon, PhoneIcon } from '@heroicons/react/solid'
 
@@ -76,20 +76,20 @@ const AdminEmployeePage = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const request = await axios.get(`https://node.greenjeans509.com/api/employee/${employee_id}`)
+      const request = await axios.get(`${Constants.url.API_EMPLOYEE_BY_ID}/${employee_id}`)
+      // const request = await axios.get(`${Constants.url.API_EMPLOYEE_BY_ID}/${employee_id}`)
+      
       setEmployee(request.data)
-      console.log(request.data)
       return request;
     }
     fetchData()
   }, [])// eslint-disable-line react-hooks/exhaustive-deps
 
   
-  const deleteEmployee = (employee_id) => {
-    axios.delete(`https://node.greenjeans509.com/api/employee/delete/${employee_id}`).then((response) =>{
-      // console.log(customer.Customer_ID)
-    })
-  }
+  // const deleteEmployee = (employee_id) => {
+  //   axios.delete(`${Constants.url.API_DELETE_EMPLOYEE}/${employee_id}`).then((response) =>{
+  //   })
+  // }
 
   return (
     <>

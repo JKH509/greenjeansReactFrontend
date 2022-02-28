@@ -1,30 +1,15 @@
-import React,{ useState, useEffect } from 'react'
+import React,{ useState } from 'react'
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
-// import Constants from '../../../utilities/Constants'
+import { Constants } from '../../../utilities/Constants'
+import { useNavigate } from 'react-router';
 
 uuidv4();
-// import DayOfWeekRadio from '../admin_components/DayOfWeekRadio';
+
 
 
 const AdminAddCustomerPage = () => {
-
-
-  useEffect(() => {
-   
-     }, [])// eslint-disable-line react-hooks/exhaustive-deps
-
-
-  // const onClickAddCustomer =(e) => {
-  //   e.preventDefault();
-  //   async function addCustomer() {
-  //     const request = await axios.post('http://localhost:5001/api/customer/add-customer')
-  //     // setCustomers(request.data)
-  //     console.log(request)
-  //     return request;
-  //   }
-  //   addCustomer()
-  // }
+  let navigate = useNavigate();
 
   const addCustomer = async (e) => {
     e.preventDefault();
@@ -53,7 +38,8 @@ const AdminAddCustomerPage = () => {
     formData.append("property_image", property_image);
     formData.append("preferred_payment_method", customerPaymentType);
     
-    axios.post('https://node.greenjeans509.com/api/customer/add-customer', formData);
+    axios.post(`${Constants.url.API_ADD_CUSTOMER}`, formData)
+    navigate("/admin/customers");
   };
 
 
@@ -76,7 +62,7 @@ const AdminAddCustomerPage = () => {
   const [ customerBillingCity , setCustomerBillingCity ] = useState('')
   const [ customerBillingState , setCustomerBillingState ] = useState('')
   const [ customerBillingZip , setCustomerBillingZip ] = useState('')
-  const [ customerBillingCountry , setCustomerBillingCountry ] = useState('United States')
+  const [  , setCustomerBillingCountry ] = useState('United States')
   const [ customerDistance , setCustomerDistance ] = useState('')
   const [ customerNotes , setCustomerNotes ] = useState('')
   const [ customerPriority , setCustomerPriority ] = useState('Tuesday')

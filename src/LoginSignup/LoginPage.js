@@ -2,10 +2,12 @@ import React, {useState, useContext} from 'react';
 import { useNavigate } from 'react-router';
 import { AuthContext } from '../helpers/AuthContext';
 import axios from 'axios';
+import { Constants } from '../utilities/Constants'
+
 
 
 const LoginPage = () => {
-
+ 
     const [ userPassword, setUserPassword ] = useState('')
     const [ errors, setErrors ] = useState('')
     const [ userName, setUserName ] = useState('')
@@ -18,15 +20,13 @@ const LoginPage = () => {
     e.preventDefault();
 
     const data = {userName, userPassword}
-    axios.post('https://node.greenjeans509.com/api/login', data).then((response) => {
+      axios.post(`${Constants.url.API_GET_LOGIN}`, data).then((response) => {
       if(response.data.error ){
         setErrors(response.data.error)
       } else {
-        // sessionStorage.setItem("accessToken", response.data)
         setErrors("")
-        sessionStorage.setItem("accessToken", response.token)
+        sessionStorage.setItem("accessToken", response.data.token)
         setAuthState({userName: response.data.userName, id: response.data.id, status:true})
-        // navigate(`/profile/${userName}`)
         navigate('/')
       };
     });

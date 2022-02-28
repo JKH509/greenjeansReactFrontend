@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { useParams } from 'react-router'
-// import { API_BASE_URL } from '../../../utilities/Constants'
+import { Constants } from '../../../utilities/Constants'
 
 const AdminEditCustomerPage = () => {
 const {customer_id} = useParams();
-// const [ customer, setCustomer ] = useState('')
 
   const [ customerFirstName ,setCustomerFirstName ] = useState('')
   const [ customerLastName ,setCustomerLastName ] = useState('')
@@ -36,7 +35,7 @@ const {customer_id} = useParams();
 useEffect(() => {
   const getDataById = async () => {
     
-    const {data} = await axios.get(`https://node.greenjeans509.com/api/customer/${customer_id}`)
+    const {data} = await axios.get(`${Constants.url.API_GET_CUSTOMER_BY_ID}/${customer_id}`)
     // console.log(data)
 
     setCustomerFirstName(data.first_name)
@@ -92,7 +91,7 @@ const updateHandler = async (e) => {
     preferred_payment_method: customerPaymentType,
   };
   
-  await axios.put(`https://node.greenjeans509.com/api/customer/edit/${customer_id}`, data)
+  await axios.put(`${Constants.url.API_EDIT_CUSTOMER_BY_ID}/${customer_id}`, data)
   // history.push('/services')
 }
 
@@ -555,6 +554,7 @@ const fillBilling  = () => {
         <div className="pt-5">
           <div className="flex justify-end">
             <button
+            
               type="button"
               className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >

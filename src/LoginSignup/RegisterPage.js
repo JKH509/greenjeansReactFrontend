@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router'
 import axios from 'axios';
+import { Constants } from '../utilities/Constants'
 
 const RegisterPage = () => {
 
@@ -17,8 +18,7 @@ const RegisterPage = () => {
     e.preventDefault();
     if(userPassOne === userPassword ) setUserPassword(userPassOne);
       setUserError('')
-      axios.post("https://node.greenjeans509.com/api/register", { userName, userEmail, userPassword } )
-      console.log({userPassword})
+      axios.post(`${Constants.url.API_REGISTER}`, { userName, userEmail, userPassword } )
       navigate("/login")
   }
 

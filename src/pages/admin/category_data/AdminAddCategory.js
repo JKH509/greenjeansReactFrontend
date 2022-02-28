@@ -1,6 +1,6 @@
 import React, {useState } from 'react'
 import axios from 'axios'
-// import { API_BASE_URL } from '../../../utilities/Constants'
+import { Constants } from '../../../utilities/Constants'
 
 const AdminAddCategory = () => {
 
@@ -20,7 +20,7 @@ const AdminAddCategory = () => {
     formData.append("category_season", categorySeason);
     formData.append("category_image", category_image);
 
-    axios.post('https://node.greenjeans509.com/api/category/add-category', formData);
+    axios.post(`${Constants.url.API_ADD_CATEGORY}`, formData);
   };
 
 
@@ -103,25 +103,10 @@ const AdminAddCategory = () => {
                 />
               </div>
             </div>
-
-
-            
-
-           
-
-            
           </div>
 
           
          
-       
-          
-            
-
-           
-
-
-
       <div className="pt-5">
         <div className="flex justify-end">
           <button

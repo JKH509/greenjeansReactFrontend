@@ -1,7 +1,7 @@
 import React,{ useState, useEffect} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-// import { API_BASE_URL } from '../../../utilities/Constants'
+import { Constants } from '../../../utilities/Constants'
 
 const AdminEmployeesPage = () => {
 
@@ -9,7 +9,7 @@ const AdminEmployeesPage = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const request = await axios.get('https://node.greenjeans509.com/api/employees/list')
+      const request = await axios.get(`${Constants.url.API_GET_ALL_EMPLOYEES}`)
       setEmployees(request.data)
       return request;
     }
@@ -27,14 +27,14 @@ const AdminEmployeesPage = () => {
           </p>
         </div>
         <ul
-          role="list"
+          
           className="mx-auto grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-4 md:gap-x-6 lg:max-w-5xl lg:gap-x-8 lg:gap-y-12 xl:grid-cols-6"
         >
           {employees.map((person) => (
             <li key={person.employee_id}>
               <div className="space-y-4">
                 {/* <img className="mx-auto h-20 w-20 rounded-full lg:w-24 lg:h-24" src={person.imageUrl} alt="" /> */}
-                <img src={`https://node.greenjeans509.com/${person.employee_image}`} alt={person.first_name} />
+                <img src={`${Constants.url.API_URL}/${person.employee_image}`} alt={person.first_name} />
                 <div className="space-y-2">
                   <div className="text-xs font-medium lg:text-sm">
                     <h3>{person.first_name}{" "}{person.last_name}</h3>

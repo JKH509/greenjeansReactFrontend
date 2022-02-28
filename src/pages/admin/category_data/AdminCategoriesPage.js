@@ -1,7 +1,7 @@
 import React,  {useState, useEffect} from 'react'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-// import { API_BASE_URL } from '../../../utilities/Constants'
+import { Constants } from '../../../utilities/Constants'
 
 const AdminCategoriesPage = () => {
 
@@ -9,17 +9,16 @@ const AdminCategoriesPage = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const request = await axios.get('https://node.greenjeans509.com/api/categories/list')
+      const request = await axios.get(`${Constants.url.API_GET_ALL_CATEGORIES}`)
        setCategory(request.data)
-      console.log(request.data)
       return request;
     }
     fetchData()
   }, []);// eslint-disable-line react-hooks/exhaustive-deps
 
-  const click = () => {
-    alert('clicked')
-  }
+  // const click = () => {
+  //   alert('clicked')
+  // }
 
   return (
     <div className="bg-white">
@@ -34,7 +33,7 @@ const AdminCategoriesPage = () => {
             >
               <div className="aspect-w-3 aspect-h-4 bg-gray-200 group-hover:opacity-75 sm:aspect-none sm:h-96">
                 <img
-                  src={`https://node.greenjeans509.com/${product.category_image}`}
+                  src={`${Constants.url.API_URL}/${product.category_image}`}
                   
                   alt={product.category_name}
                   className="w-full h-full object-center object-cover sm:w-full sm:h-full"

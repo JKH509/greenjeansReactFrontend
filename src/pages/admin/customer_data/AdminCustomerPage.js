@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-// import { API_BASE_URL } from '../../../utilities/Constants'
+import { Constants } from '../../../utilities/Constants'
 
 import InvoiceTables from "../admin_components/InvoiceTables";
 
@@ -13,8 +13,7 @@ const AdminCustomerPage = () => {
   useEffect(() => {
     async function fetchData() {
       const request = await axios.get(
-        
-        `https://node.greenjeans509.com/api/customer/${customer_id}`
+        `${Constants.url.API_GET_CUSTOMER_BY_ID}/${customer_id}`
       );
       setCustomer(request.data);
       return request;
@@ -38,7 +37,7 @@ const AdminCustomerPage = () => {
         <p className="mt-1 max-w-6xl text-sm text-gray-500">account details.</p>
         <span className="d-flex justify-content-end">
           <img
-            src={`http://localhost:5001/${customer.property_image}`}
+            src={`${Constants.url.API_URL}/${customer.property_image}`}
             alt=""
             style={{ width: "350px" }}
             className=""

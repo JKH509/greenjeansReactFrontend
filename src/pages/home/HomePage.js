@@ -8,6 +8,8 @@ import EarlyBirdSpecials from '../../components/Services/EarlyBirdSpecials'
 import house_lawn from '../../assets/images/gibbon-house-unsplash.jpg'
 
 
+
+
 const navigation = [
   { name: 'Product', href: '#' },
   { name: 'Features', href: '#' },
@@ -147,7 +149,7 @@ const HomePage = () => {
               <span className="block text-sky-500 xl:inline">You just enjoy it</span>
             </h1>
             <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-              Keeping your lawn green and healthy all year doesn't have to be a chore, let Green Jeans Lawn Service do all the work so you can spend your weekend with those who matter most.
+              Keeping your lawn green and healthy all year doesn't have to be a chore, let Green Jeans Lawn Service do all the work so you can spend your weekend with those who matter most. 
             </p>
             <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
               <div className="rounded-md shadow">

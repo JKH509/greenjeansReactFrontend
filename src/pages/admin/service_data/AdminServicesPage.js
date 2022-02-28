@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from 'react'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-// import { API_BASE_URL } from '../../../utilities/Constants'
+import { Constants } from '../../../utilities/Constants'
 
 const AdminServicesPage = () => {
 
@@ -10,9 +10,9 @@ const AdminServicesPage = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const request = await axios.get('https://node.greenjeans509.com/api/services/list')
+      const request = await axios.get(`${Constants.url.API_GET_ALL_SERVICES}`)
       setServices(request.data)
-      console.log(request.data)
+      // console.log(request.data)
       return request;
     }
     fetchData()
@@ -32,7 +32,7 @@ const AdminServicesPage = () => {
             >
               <div className="aspect-w-3 aspect-h-4 bg-gray-200 group-hover:opacity-75 sm:aspect-none sm:h-96">
                 <img
-                  src={`https://node.greenjeans509.com/${product.service_image}`}
+                  src={`${Constants.url.API_URL}/${product.service_image}`}
                   
                   alt={product.imageAlt}
                   className="w-full h-full object-center object-cover sm:w-full sm:h-full"

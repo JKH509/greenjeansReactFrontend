@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
-// import { API_BASE_URL } from '../../../utilities/Constants'
+import { Constants } from '../../../utilities/Constants'
 
 const AdminEditServicePage = () => {
 
@@ -19,7 +19,7 @@ const AdminEditServicePage = () => {
 
   useEffect(() => {
   const getDataById = async () => {
-    const {data} = await axios.get(`https://node.greenjeans509.com/api/service/${service_id}`)
+    const {data} = await axios.get(`${Constants.url.API_SERVICE_BY_ID}/${service_id}`)
 
     setNewServiceName(data.service_type)
     setNewServiceDescription(data.service_description)
@@ -52,7 +52,7 @@ const updateHandler = async (e) => {
       service_season_winter: newServiceSeasonWinterCheckBox, 
   }
 
-  await axios.put(`https://node.greenjeans509.com/api/service/${service_id}`, data)
+  await axios.put(`${Constants.url.API_EDIT_SERVICE_BY_ID}/${service_id}`, data)
   // history.push('/services')
 }
 
