@@ -143,6 +143,18 @@ const HomePage = () => {
         </Popover>
 
         <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
+          <div>
+            <h5>This site is still under development</h5>
+            <p>You can register for your own profile or use the following login credentials. Please note, as of right now
+              there is not a lot of detail on many of the pages. 
+            </p>
+            <ul>
+              USER ACCESS
+              <li>ADMIN: user_name = admin, password = admin123</li>
+              <li>Customer: user_name = Client1, password = password123 </li>
+              <li>Employee: user_name = Employee1 , password = password123 </li>
+            </ul>
+          </div>
           <div className="sm:text-center lg:text-left">
             <h1 className="text-4xl tracking-tight font-extrabold text-green-500 sm:text-5xl md:text-6xl">
               <span className="block xl:inline">Let us maintain your lawn</span>{' '}

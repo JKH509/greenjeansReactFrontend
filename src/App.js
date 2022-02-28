@@ -84,7 +84,7 @@ useEffect(() => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         
-        {authState.id % 2 ? 
+        {authState.id % 2 || authState.id === 4  ? 
         <Route path="/profile/:username" element={<EmployeeProfile />}
         />  
         : 
@@ -117,7 +117,9 @@ useEffect(() => {
 
 
 {/* admin facing */}
-{authState.id !== 1 ?  <Route path="/dashboard" element={<Dashboard />} /> : <Route path="/" element={<HomePage />} /> }
+{/* {authState.id === 1 &&  <Route path="/dashboard" element={<Dashboard />} /> : <Route path="/" element={<HomePage />} /> } */}
+{authState.id === 1 &&  <Route path="/dashboard" element={<Dashboard />} />  }
+{authState.id === 4 &&  <Route path="/dashboard" element={<Dashboard />} />  }
         
 
 {/* customers */}
