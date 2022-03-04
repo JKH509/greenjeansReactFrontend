@@ -23,9 +23,9 @@ import HomePage from './pages/home/HomePage';
 import Header from './shared/Header'
 import AdminServicePage from './pages/admin/service_data/AdminServicePage';
 import EmployeeProfile from './pages/profiles/EmployeeProfile';
-import Lawns from './pages/services/lawn/Lawns';
-import FertilizerPage from './pages/services/fertilizer/FertilizerPage';
-import Snow from './pages/services/snow/Snow';
+// import Lawns from './pages/services/lawn/Lawns';
+// import FertilizerPage from './pages/services/fertilizer/FertilizerPage';
+// import Snow from './pages/services/snow/Snow';
 import AdminCategoriesPage from './pages/admin/category_data/AdminCategoriesPage';
 import AdminAddCategory from './pages/admin/category_data/AdminAddCategory';
 import AdminEditCategory from './pages/admin/category_data/AdminEditCategory';
@@ -36,6 +36,13 @@ import RegisterPage from './LoginSignup/RegisterPage';
 import ProfilesPage from './pages/profiles/ProfilesPage';
 // import ClientProfilePage from './pages/clients/ClientProfilePage';
 import {Constants}  from './utilities/Constants'
+import EditEmployeeProfile from './pages/profiles/EditEmployeeProfile';
+import ComingSoon from './pages/ComingSoon';
+import SelfBidPage from './pages/selfBid/SelfBidPage';
+import About from './pages/about/About';
+import NotFound from './NotFound';
+import ContactPage from './pages/contact/ContactPage';
+// import UnderConstruction from './pages/UnderConstruction';
 
 
 
@@ -73,53 +80,65 @@ useEffect(() => {
   return (
     <div>
       <AuthContext.Provider value={{ authState, setAuthState }}>
+
+        {/* As long as the pathname is not equal to the pathnames below, then display the header, else the header doesn't display */}
       {location.pathname === "/login" || location.pathname === "/sign-up" || location.pathname === "/dashboard" ? (
           ""
         ) : (
           <Header />
         )}
+
       <Routes>
-{/* client facing */}
+
+{/* visitor facing */}
         <Route path="/" element={<HomePage />} />
+         {/* <Route path="/categories" element={<CategoryPage />} /> */}
+         <Route path="/about" element={<About />} />
+        <Route path="/services" element={<CategoryPage />} />
+        {/* <Route path="/services/:service_id" element={<CategoryPage />} /> */}
+        {/* <Route path="/lawn" element={<Lawns />} /> */}
+        <Route path="/lawns" element={<ComingSoon /> } />
+        {/* <Route path="/fertilizer" element={<FertilizerPage />} /> */}
+        <Route path="/fertilizer" element={<ComingSoon />} />
+        <Route path="/shrub-garden" element={<ComingSoon />} />
+        <Route path="/snow" element={<ComingSoon />} />
+        <Route path="/estimates" element={<SelfBidPage />} />
+        <Route path='/contact-us' element={<ContactPage />} />
+
+        {/* Login or register pages, will eventually check by client and employee ID */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         
+
+{/* client and employee profiles. Will eventually sort by DB id numbers with employees as even and clients odd with admin having 1-10 */}
         {authState.id % 2 || authState.id === 4  ? 
-        <Route path="/profile/:username" element={<EmployeeProfile />}
-        />  
+        <>
+          <Route path="/profile/:username" element={<EmployeeProfile />}/> 
+          <Route path="/profile/:username/:id" element={<EditEmployeeProfile />} />
+        </> 
         : 
         // <Route path="/profile/:username" element={<ClientProfilePage />} 
         <Route path="/profile/:username" element={<ProfilesPage />} 
         /> }
         
-         {/* <Route path="/profile/:username" element={<ProfilesPage />} /> */}
-        {/* This does work, I don't know if I should use this instead of the above?  */}
-        
-        {/* <Route path={`/profile/:${authState.userName}`} element={<ProfilesPage />} /> */}
-
-        {/* <Route path="/client-profile" element={<ProfilesPage />} /> */}
-        {/* <Route path="/client-profile" element={ authState.userName !== "James" ? <ClientProfilePage /> : <ProfilesPage /> } /> */}
-        
-        {/* {username === "James" && <Redirect to="/client-profile" />} */}
-        {/* <Route path="/client-profile/:username" element={<ProfilesPage />} /> */}
+     
 
 
 
-        {/* <Route path="/categories" element={<CategoryPage />} /> */}
-        <Route path="/services" element={<CategoryPage />} />
-        {/* <Route path="/services/:service_id" element={<CategoryPage />} /> */}
-        <Route path="/lawn" element={<Lawns />} />
-        <Route path="/fertilizer" element={<FertilizerPage />} />
-        <Route path="/snow" element={<Snow />} />
+       
+
+
 
 {/* profiles */}
-        <Route path="/profile" element={<EmployeeProfile />} />
+        {/* <Route path="/profile" element={<EmployeeProfile />} /> */}
+
+
 
 
 {/* admin facing */}
-{/* {authState.id === 1 &&  <Route path="/dashboard" element={<Dashboard />} /> : <Route path="/" element={<HomePage />} /> } */}
-{authState.id === 1 &&  <Route path="/dashboard" element={<Dashboard />} />  }
-{authState.id === 4 &&  <Route path="/dashboard" element={<Dashboard />} />  }
+
+{authState.id === 1 || authState.id === 4 ? <Route path="/dashboard" element={<Dashboard />} /> : <Route path="/" element={<HomePage />} />   }
+{/* {authState.id === 4 &&  <Route path="/dashboard" element={<Dashboard />} />  } */}
         
 
 {/* customers */}
@@ -173,7 +192,9 @@ useEffect(() => {
         <Route path="/admin/create/category" element={<AdminAddCategory />} />
         <Route path="/admin/edit/category/:category_id" element={<AdminEditCategory />} />
 
-        {/* <Route path="*" element={<NotFound />} /> */}
+{/* 404 error page  */}
+        <Route path="*" element={<NotFound />} />
+  
       </Routes>
       {/* <Footer /> */}
       </AuthContext.Provider>

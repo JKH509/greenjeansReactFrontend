@@ -5,10 +5,13 @@ import { Link } from "react-router-dom";
 import { Constants } from '../../../utilities/Constants'
 
 import InvoiceTables from "../admin_components/InvoiceTables";
+import BackButtons from "../../../components/buttons/BackButtons";
+
 
 const AdminCustomerPage = () => {
   const { customer_id } = useParams();
   const [customer, setCustomer] = useState([]);
+  // let navigate = useNavigate()
 
   useEffect(() => {
     async function fetchData() {
@@ -133,11 +136,13 @@ const AdminCustomerPage = () => {
           </div>
 
           <div className="sm:col-span-2 d-flex justify-evenly">
-            <Link to="">back</Link>
+            {/* <Link to={navigate.back()}>back</Link> */}
+            {/* <button onClick={() => navigate.goBack()}>Back</button> */}
+            <BackButtons />
             <Link to={`/admin/edit/customer/${customer.customer_id}`}>
               edit
             </Link>
-            <Link to="">create invoice</Link>
+            <Link to={`/admin/customer/invoice/${customer.customer_id}`}>create invoice</Link>
           </div>
         </dl>
       </div>

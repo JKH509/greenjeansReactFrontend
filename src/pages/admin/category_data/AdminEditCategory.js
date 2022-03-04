@@ -1,12 +1,14 @@
 import React,{useState, useEffect} from 'react'
 import axios from 'axios';
-import { useParams } from 'react-router';
+import { useParams, useNavigate } from 'react-router';
 // import { Link } from 'react-router-dom';
+
 import { Constants } from '../../../utilities/Constants'
 
 const AdminEditCategory = () => {
 
   const { category_id } = useParams();
+  let navigate = useNavigate()
  
   const [ categoryName, setCategoryName ] = useState('')
   const [ categoryDescription, setCategoryDescription ] = useState('')
@@ -16,7 +18,6 @@ const AdminEditCategory = () => {
   useEffect(() => {
     const getDataById = async () => {
       const {data} = await axios.get(`${Constants.url.API_CATEGORY_BY_ID}/${category_id}`)
-  
       setCategoryName(data.category_name)
       setCategoryDescription(data.category_description)
       setCategorySeason(data.category_season)
@@ -37,7 +38,7 @@ const AdminEditCategory = () => {
     }
   
     await axios.put(`${Constants.url.API_EDIT_CATEGORY_BY_ID}/${category_id}`, data)
-    // history.push('/services')
+    navigate(`/admin/category/${category_id}`)
   }
 
 

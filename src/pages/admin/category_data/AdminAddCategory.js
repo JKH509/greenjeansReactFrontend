@@ -1,8 +1,10 @@
 import React, {useState } from 'react'
 import axios from 'axios'
 import { Constants } from '../../../utilities/Constants'
+import { useNavigate } from 'react-router'
 
 const AdminAddCategory = () => {
+  let navigate = useNavigate()
 
   const [ categoryName, setCategoryName ] = useState('')
   const [ categoryDescription, setCategoryDescription ] = useState('')
@@ -21,6 +23,7 @@ const AdminAddCategory = () => {
     formData.append("category_image", category_image);
 
     axios.post(`${Constants.url.API_ADD_CATEGORY}`, formData);
+    navigate("/admin/category")
   };
 
 

@@ -1,9 +1,10 @@
 import React from 'react'
+import ComingSoon from '../../ComingSoon'
 
 const Lawns = () => {
   return (
     <div>
-      Lawn care
+      <ComingSoon />
     </div>
   )
 }

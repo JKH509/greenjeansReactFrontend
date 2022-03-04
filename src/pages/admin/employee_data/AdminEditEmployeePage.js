@@ -38,7 +38,7 @@ const AdminEditEmployeePage = () => {
   useEffect(() => {
     const getDataById = async () => {
       const {data} = await axios.get(`${Constants.url.API_EMPLOYEE_BY_ID}/${employee_id}`)
-      console.log(data)
+
 
       setEmployeeFirstName(data.first_name)
       setEmployeeLastName(data.last_name)

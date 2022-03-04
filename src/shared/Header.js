@@ -23,32 +23,32 @@ const solutions = [
   {
     name: 'Analytics',
     description: 'Get a better understanding of where your traffic is coming from.',
-    href: '#',
+    to: '/',
     icon: ChartBarIcon,
   },
   {
     name: 'Engagement',
     description: 'Speak directly to your customers in a more meaningful way.',
-    href: '#',
+    to: '/',
     icon: CursorClickIcon,
   },
-  { name: 'Security', description: "Your customers' data will be safe and secure.", href: '#', icon: ShieldCheckIcon },
+  { name: 'Security', description: "Your customers' data will be safe and secure.", to: '/', icon: ShieldCheckIcon },
   {
     name: 'Integrations',
     description: "Connect with third-party tools that you're already using.",
-    href: '#',
+    to: '/',
     icon: ViewGridIcon,
   },
   {
     name: 'Automations',
     description: 'Build strategic funnels that will drive your customers to convert',
-    href: '#',
+    to: '/',
     icon: RefreshIcon,
   },
   {
     name: 'Reports',
     description: 'Get detailed reports that will help you make more informed decisions ',
-    href: '#',
+    to: '/dashboard',
     icon: DocumentReportIcon,
   },
 ]
@@ -56,11 +56,11 @@ const resources = [
   {
     name: 'Help Center',
     description: 'Get all of your questions answered in our forums or contact support.',
-    href: '#',
+    to: '/',
   },
-  { name: 'Guides', description: 'Learn how to maximize our platform to get the most out of it.', href: '#' },
-  { name: 'Events', description: 'See what meet-ups and other events we might be planning near you.', href: '#' },
-  { name: 'Security', description: 'Understand how we take your privacy seriously.', href: '#' },
+  { name: 'Guides', description: 'Learn how to maximize our platform to get the most out of it.', to: '/' },
+  { name: 'Events', description: 'See what meet-ups and other events we might be planning near you.', to: '/' },
+  { name: 'Security', description: 'Understand how we take your privacy seriously.', to: '/' },
 ]
 
 function classNames(...classes) {
@@ -70,6 +70,7 @@ function classNames(...classes) {
 const Header = () => {
 
   const authState = useContext(AuthContext)
+  const { setAuthState } = useContext(AuthContext)
 
   const location = useLocation()
   let navigate = useNavigate();
@@ -83,6 +84,7 @@ const Header = () => {
   const logOut = async () => {
     sessionStorage.removeItem("accessToken");
     window.sessionStorage.clear();
+    setAuthState({userName: "", id: 0, status:false})
     navigate("/")
     window.location.reload();
   };
@@ -191,7 +193,7 @@ const Header = () => {
 
                           <Link
                             // key={item.name}
-                            to="/snow"
+                            to="/shrub-garden"
                             className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
                           >
                             <div className="flex-shrink-0 flex items-center justify-center h-3 w-3 rounded-md bg-green-500 text-white sm:h-6 sm:w-6">
@@ -228,31 +230,35 @@ const Header = () => {
               )}
             </Popover>
             <Link
-              to="#"
+              to="/about"
               className="text-base font-medium text-gray-500 hover:text-gray-900"
             >
-              Pricing
+              About
             </Link>
             <Link
-              to="#"
+              to="/estimates"
               className="text-base font-medium text-gray-500 hover:text-gray-900"
             >
-              Docs
+              Estimates
             </Link>
 
-            {authState.authState.id === 1 && <Link
-              to="/dashboard"
+            <Link
+              to="/"
               className="text-base font-medium text-gray-500 hover:text-gray-900"
             >
-              dashboard
-            </Link>}
-            {authState.authState.id === 4 && <Link
-              to="/dashboard"
-              className="text-base font-medium text-gray-500 hover:text-gray-900"
-            >
-              dashboard
-            </Link>}
-            
+              Clients
+            </Link>
+
+            {authState.authState.id === 1 || authState.authState.id === 4 ? (
+              <Link
+                to="/dashboard"
+                className="text-base font-medium text-gray-500 hover:text-gray-900"
+              >
+                dashboard
+              </Link>
+            ) : (
+              <></>
+            )}
 
             <Popover className="relative">
               {({ open }) => (
@@ -263,15 +269,23 @@ const Header = () => {
                       "group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     )}
                   >
-                    {authState.authState.id !== 1 && authState.authState.id !== 4 ? <span>More</span> : <span>Admin</span>}
-                    
-                    <ChevronDownIcon
-                      className={classNames(
-                        open ? "text-gray-600" : "text-gray-400",
-                        "ml-2 h-5 w-5 group-hover:text-gray-500"
-                      )}
-                      aria-hidden="true"
-                    />
+                    {/* ONLY display if user is logged in as ADMIN */}
+                    {authState.authState.id !== 1 &&
+                    authState.authState.id !== 4 ? (
+                      // <span>More</span>
+                      ""
+                    ) : (
+                      <>
+                        <span>Admin</span>
+                        <ChevronDownIcon
+                          className={classNames(
+                            open ? "text-gray-600" : "text-gray-400",
+                            "ml-2 h-5 w-5 group-hover:text-gray-500"
+                          )}
+                          aria-hidden="true"
+                        />
+                      </>
+                    )}
                   </Popover.Button>
 
                   <Transition
@@ -283,96 +297,96 @@ const Header = () => {
                     leaveFrom="opacity-100 translate-y-0"
                     leaveTo="opacity-0 translate-y-1"
                   >
-                    <Popover.Panel className="absolute z-30  left-1/2 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-xs sm:px-0">
-                      <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
-                        <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
-                          {/* {resources.map((item) => ( */}
-                          {/* <Link key={item.name} href={item.href} className="-m-3 p-3 block rounded-md hover:bg-gray-50"> */}
-                          
-                          {/* {authState.authState.id === */}
-                          {authState.authState.id === 1 || authState.authState.id === 4 ?
-                          <>
-                          <Link
-                            to="/admin/customers"
-                            className="-m-3 p-2 block rounded-md hover:bg-gray-50"
-                          >
-                            <p className="text-base font-medium text-gray-900">
-                              Customer List
-                            </p>
-                          </Link>
-                          <Link
-                            to="/admin/create/customer"
-                            className="-m-3 p-2 block rounded-md hover:bg-gray-50"
-                          >
-                            <p className="text-base font-medium text-gray-900">
-                              Add Customer
-                            </p>
-                          </Link>
+                    {authState.authState.id === 1 ||
+                    authState.authState.id === 4 ? (
+                      <Popover.Panel className="absolute z-30  left-1/2 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-xs sm:px-0">
+                        <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
+                          <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
+                            {/* {resources.map((item) => ( */}
+                            {/* <Link key={item.name} href={item.href} className="-m-3 p-3 block rounded-md hover:bg-gray-50"> */}
 
-                          <Link
-                            to="/admin/employees"
-                            className="-m-3 p-2 block rounded-md hover:bg-gray-50"
-                          >
-                            <p className="text-base font-medium text-gray-900">
-                              Employee List
-                            </p>
-                          </Link>
-                          <Link
-                            to="/admin/create/employee"
-                            className="-m-3 p-2 block rounded-md hover:bg-gray-50"
-                          >
-                            <p className="text-base font-medium text-gray-900">
-                              Add Employee
-                            </p>
-                          </Link>
+                            <>
+                              <Link
+                                to="/admin/customers"
+                                className="-m-3 p-2 block rounded-md hover:bg-gray-50"
+                              >
+                                <p className="text-base font-medium text-gray-900">
+                                  Customer List
+                                </p>
+                              </Link>
+                              <Link
+                                to="/admin/create/customer"
+                                className="-m-3 p-2 block rounded-md hover:bg-gray-50"
+                              >
+                                <p className="text-base font-medium text-gray-900">
+                                  Add Customer
+                                </p>
+                              </Link>
 
-                          <Link
-                            to="/admin/services"
-                            className="-m-3 p-2 block rounded-md hover:bg-gray-50"
-                          >
-                            <p className="text-base font-medium text-gray-900">
-                              Service List
-                            </p>
-                          </Link>
-                          <Link
-                            to="/admin/create/service"
-                            className="-m-3 p-2 block rounded-md hover:bg-gray-50"
-                          >
-                            <p className="text-base font-medium text-gray-900">
-                              Add Service
-                            </p>
-                          </Link>
+                              <Link
+                                to="/admin/employees"
+                                className="-m-3 p-2 block rounded-md hover:bg-gray-50"
+                              >
+                                <p className="text-base font-medium text-gray-900">
+                                  Employee List
+                                </p>
+                              </Link>
+                              <Link
+                                to="/admin/create/employee"
+                                className="-m-3 p-2 block rounded-md hover:bg-gray-50"
+                              >
+                                <p className="text-base font-medium text-gray-900">
+                                  Add Employee
+                                </p>
+                              </Link>
 
-                          <Link
-                            to="/admin/categories"
-                            className="-m-3 p-2 block rounded-md hover:bg-gray-50"
-                          >
-                            <p className="text-base font-medium text-gray-900">
-                              Category List
-                            </p>
-                          </Link>
-                          <Link
-                            to="/admin/create/category"
-                            className="-m-3 p-2 block rounded-md hover:bg-gray-50"
-                          >
-                            <p className="text-base font-medium text-gray-900">
-                              Add Category
-                            </p>
-                          </Link>
-                          </> : ""
-                        }
-                          {/* /* ))} */ }
+                              <Link
+                                to="/admin/services"
+                                className="-m-3 p-2 block rounded-md hover:bg-gray-50"
+                              >
+                                <p className="text-base font-medium text-gray-900">
+                                  Service List
+                                </p>
+                              </Link>
+                              <Link
+                                to="/admin/create/service"
+                                className="-m-3 p-2 block rounded-md hover:bg-gray-50"
+                              >
+                                <p className="text-base font-medium text-gray-900">
+                                  Add Service
+                                </p>
+                              </Link>
+
+                              <Link
+                                to="/admin/categories"
+                                className="-m-3 p-2 block rounded-md hover:bg-gray-50"
+                              >
+                                <p className="text-base font-medium text-gray-900">
+                                  Category List
+                                </p>
+                              </Link>
+                              <Link
+                                to="/admin/create/category"
+                                className="-m-3 p-2 block rounded-md hover:bg-gray-50"
+                              >
+                                <p className="text-base font-medium text-gray-900">
+                                  Add Category
+                                </p>
+                              </Link>
+                            </>
+                          </div>
                         </div>
-                      </div>
-                    </Popover.Panel>
+                      </Popover.Panel>
+                    ) : (
+                      ""
+                    )}
                   </Transition>
                 </>
               )}
             </Popover>
           </Popover.Group>
-          <div className="flex items-center md:ml-12">
-            
 
+          <div className="flex items-center md:ml-12">
             {!sessionStorage.getItem("accessToken") ? (
               <>
                 <Link
@@ -392,8 +406,6 @@ const Header = () => {
               </>
             ) : (
               <>
-               
-
                 {location.pathname === "/" && (
                   <Link
                     to={`/profile/${authState.authState.userName}`}
@@ -427,17 +439,13 @@ const Header = () => {
       >
         <Popover.Panel
           focus
-          className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
+          className="absolute z-30 top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
         >
           <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
             <div className="pt-5 pb-6 px-5">
               <div className="flex items-center justify-between">
                 <div>
-                  <img
-                    className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-                    alt="Workflow"
-                  />
+                  <img className="h-8 w-auto" src={logo} alt="green jeans" />
                 </div>
                 <div className="-mr-2">
                   <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
@@ -446,57 +454,59 @@ const Header = () => {
                   </Popover.Button>
                 </div>
               </div>
-              <div className="mt-6">
-                <nav className="grid gap-6">
-                  {solutions.map((item) => (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      className="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50"
-                    >
-                      <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-blue-500 text-white">
-                        <item.icon className="h-6 w-6" aria-hidden="true" />
-                      </div>
-                      <div className="ml-4 text-base font-medium text-gray-900">
-                        {item.name}
-                      </div>
-                    </Link>
-                  ))}
-                </nav>
-              </div>
             </div>
             <div className="py-6 px-5">
               <div className="grid grid-cols-2 gap-4">
-                <Link
-                  to="#"
+                {location.pathname !== "/" && <Link
+                  to="/"
                   className="text-base font-medium text-gray-900 hover:text-gray-700"
                 >
-                  Pricing
+                  Home
+                </Link>}
+              <Link
+                  to="/services"
+                  className="text-base font-medium text-gray-900 hover:text-gray-700"
+                >
+                  Services
+                </Link>
+                <Link
+                  to="/about"
+                  className="text-base font-medium text-gray-900 hover:text-gray-700"
+                >
+                  About
                 </Link>
 
                 <Link
-                  to="#"
+                  to="/estimates"
                   className="text-base font-medium text-gray-900 hover:text-gray-700"
                 >
-                  Docs
+                  Estimates
                 </Link>
 
                 <Link
-                  to="#"
+                  to="/"
+                  className="text-base font-medium text-gray-500 hover:text-gray-900"
+                >
+                  Clients
+                </Link>
+
+                <Link
+                  to="/"
                   className="text-base font-medium text-gray-900 hover:text-gray-700"
                 >
-                  Enterprise
+                  Contact Us
                 </Link>
-                {resources.map((item) => (
+                {/* {resources.map((item) => (
                   <Link
                     key={item.name}
-                    href={item.href}
+                    to={item.to}
                     className="text-base font-medium text-gray-900 hover:text-gray-700"
                   >
                     {item.name}
                   </Link>
-                ))}
+                ))} */}
               </div>
+              {!sessionStorage.getItem("accessToken") ? 
               <div className="mt-6">
                 <Link
                   to="/register"
@@ -514,31 +524,20 @@ const Header = () => {
                   </Link>
                 </p>
               </div>
+              : 
+              <Link
+                  to="/"
+                  onClick={logOut}
+                  className="ml-8 mt-3 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700"
+                >
+                  Log out
+                </Link>
+              }
             </div>
           </div>
         </Popover.Panel>
       </Transition>
     </Popover>
-
-    // <nav>
-    //   <Link to='/'>{" "}Home{" "}|</Link>
-
-    //   <Link to='/dashboard'>{" "}Dashboard{" "}</Link>
-    //   {/* <Link to='/test'>{" "}Test{" "}</Link> */}
-    //   <Link to='/admin/create/customer'>|{" "}Create customer{" "}</Link>
-    //   <Link to='/admin/customers'>|{" "}CustomerList{" "}</Link>
-
-    //   <Link to='/admin/create/employee'>|{" "}Create Employee{" "}</Link>
-    //   <Link to='/admin/employees'>|{" "}Employee List{" "}</Link>
-
-    //   <Link to='/admin/services'>|{" "}Services List{" "}</Link>
-    //   <Link to='/admin/create/service'>|{" "}Create Service{" "}</Link>
-
-    //   <Link to='/admin/categories'>|{" "}Categories List{" "}</Link>
-    //   <Link to='admin/create/category'>|{" "}Create category{" "}</Link>
-
-    //   <Link to='/profile'>|{" "}Profile</Link>
-    // </nav>
   );
 }
 

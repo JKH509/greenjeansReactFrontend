@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-import { useParams } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
+
 import { Constants } from '../../../utilities/Constants'
+import CancelButton from '../../../components/buttons/CancelButton';
 
 const AdminEditCustomerPage = () => {
 const {customer_id} = useParams();
+let navigate = useNavigate()
 
   const [ customerFirstName ,setCustomerFirstName ] = useState('')
   const [ customerLastName ,setCustomerLastName ] = useState('')
@@ -34,6 +37,7 @@ const {customer_id} = useParams();
 
 useEffect(() => {
   const getDataById = async () => {
+    
     
     const {data} = await axios.get(`${Constants.url.API_GET_CUSTOMER_BY_ID}/${customer_id}`)
     // console.log(data)
@@ -93,6 +97,7 @@ const updateHandler = async (e) => {
   
   await axios.put(`${Constants.url.API_EDIT_CUSTOMER_BY_ID}/${customer_id}`, data)
   // history.push('/services')
+  navigate(`/admin/customer/${customer_id}`)
 }
 
 
@@ -553,13 +558,7 @@ const fillBilling  = () => {
 
         <div className="pt-5">
           <div className="flex justify-end">
-            <button
-            
-              type="button"
-              className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-            >
-              Cancel
-            </button>
+            <CancelButton />
             <button
               type="submit"
               // onClick={addCustomer}

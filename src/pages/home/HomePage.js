@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
@@ -6,6 +7,7 @@ import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import EarlyBirdSpecials from '../../components/Services/EarlyBirdSpecials'
 
 import house_lawn from '../../assets/images/gibbon-house-unsplash.jpg'
+import { Constants } from '../../utilities/Constants'
 
 
 
@@ -118,8 +120,36 @@ const stats = [
 
 
 const HomePage = () => {
+  // const {data} = axios.get(`${Constants.url}/`)
+  // console.log(data)
+  // const {data} = await axios.get(`${Constants.url.API_GET_CUSTOMER_BY_ID}/${customer_id}`)
+  // useEffect(() => {
+  //   axios.get(Constants.url)
+  
+  //   return () => {
+  //     console.log("break")
+  //   }
+  // }, [])
+  
+
+
   return (
     <>
+
+<div className='text-center'>
+            <h5>This site is still under development</h5>
+            <p>You can register for your own profile or use the following login credentials. Please note, as of right now
+              there is not a lot of detail on many of the pages. 
+            </p>
+            <ul>
+              USER ACCESS
+              <li>ADMIN: user_name = admin, password = admin123</li>
+              <li>Customer: user_name = Client1, password = password123 </li>
+              <li>Employee: user_name = Employee1 , password = password123 </li>
+            </ul>
+          </div>
+
+
     <div className="relative bg-white overflow-hidden">
     <div className="max-w-7xl mx-auto">
       <div className="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
@@ -143,18 +173,7 @@ const HomePage = () => {
         </Popover>
 
         <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
-          <div>
-            <h5>This site is still under development</h5>
-            <p>You can register for your own profile or use the following login credentials. Please note, as of right now
-              there is not a lot of detail on many of the pages. 
-            </p>
-            <ul>
-              USER ACCESS
-              <li>ADMIN: user_name = admin, password = admin123</li>
-              <li>Customer: user_name = Client1, password = password123 </li>
-              <li>Employee: user_name = Employee1 , password = password123 </li>
-            </ul>
-          </div>
+          
           <div className="sm:text-center lg:text-left">
             <h1 className="text-4xl tracking-tight font-extrabold text-green-500 sm:text-5xl md:text-6xl">
               <span className="block xl:inline">Let us maintain your lawn</span>{' '}

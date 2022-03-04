@@ -1,12 +1,15 @@
 import React, {useState} from 'react'
 import axios from 'axios';
+
 // import FileUpload from '../file_uploads/FileUpload';
 import { v4 as uuidv4 } from 'uuid';
 import { Constants } from '../../../utilities/Constants'
+import { useNavigate } from 'react-router';
 uuidv4();
 
 
 const AdminAddNewEmployeePage = () => {
+  let navigate = useNavigate()
 
   const addNewEmployee = async (e) => {
     e.preventDefault();
@@ -37,6 +40,7 @@ const AdminAddNewEmployeePage = () => {
     formData.append("employeePayPreference", employeePayPreference);
     
     axios.post(`${Constants.url.API_ADD_EMPLOYEE}`, formData);
+    navigate("/admin/employees");
   };
 
 

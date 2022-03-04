@@ -3,6 +3,7 @@
 const development = {
   url: {
     API_URL: 'http://localhost:5001',
+    API_URL1: 'http://localhost:5001/api',
     // AUTH 
     API_AUTH: 'http://localhost:5001/api/auth',
     // LOGIN 

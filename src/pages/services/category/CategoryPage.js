@@ -1,6 +1,7 @@
 import React,{useState, useEffect} from 'react'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { Constants } from '../../../utilities/Constants';
 
 // import { API_BASE_URL } from '../../../utilities/Constants'
 
@@ -11,10 +12,11 @@ const CategoryPage = () => {
   useEffect(() => {
     async function fetchData() {
       
-      const request = await axios.get('https://node.greenjeans509.com/api/categories/list')
+      const request = await axios.get(`${Constants.url.API_GET_ALL_SERVICES}`)
        setCategory(request.data)
       return request;
     }
+    console.log(categories)
     fetchData()
   }, []);// eslint-disable-line react-hooks/exhaustive-deps
 
@@ -30,12 +32,12 @@ const CategoryPage = () => {
       <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-2 lg:gap-x-8">
         {categories.map((product) => (
           <div
-            key={product.category_id}
+            key={product.service_id}
             className="group relative bg-white border border-gray-200 rounded-lg flex flex-col overflow-hidden"
           >
             <div className="aspect-w-3 aspect-h-4 bg-gray-200 group-hover:opacity-75 sm:aspect-none sm:h-96">
               <img
-                src={`https://node.greenjeans509.com/${product.category_image}`}
+                src={`${Constants.url.API_URL}/${product.service_image}`}
                 
                 alt={product.category_name}
                 className="w-full h-full object-center object-cover sm:w-full sm:h-full"
@@ -43,9 +45,9 @@ const CategoryPage = () => {
             </div>
             <div className="flex-1 p-4 space-y-2 flex flex-col">
               <h3 className="text-sm font-medium text-gray-900">
-                <Link to={`/${product.category_name.trimtoLowerCase()}`}>
+                <Link to={`/${product.service_type}`}>
                   <span aria-hidden="true" className="absolute inset-0" />
-                  {product.category_name === 'Snow' ? <>{product.category_name}</> : <>{product.category_name}'s</>}
+                  {product.service_type === 'Snow' ? <>{product.service_type}</> : <>{product.service_type}</>}
                   {/* {product.category_name} */}
                 </Link>
               </h3>
