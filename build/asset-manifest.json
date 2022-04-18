@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.94c4c4e8.css",
+    "main.js": "/static/js/main.39358f66.js",
+    "static/media/gibbon-house-unsplash.jpg": "/static/media/gibbon-house-unsplash.9eafa83cfb4ea7cf97fd.jpg",
+    "static/media/victor-sprinkler-unsplash.jpg": "/static/media/victor-sprinkler-unsplash.fa1c5d5d65238609d101.jpg",
+    "static/media/remi-lawn-unsplash.jpg": "/static/media/remi-lawn-unsplash.62fe38e32f8308e16f77.jpg",
+    "static/media/web.png": "/static/media/web.76d608c9ffd2fb38a9d7.png",
+    "index.html": "/index.html",
+    "main.94c4c4e8.css.map": "/static/css/main.94c4c4e8.css.map",
+    "main.39358f66.js.map": "/static/js/main.39358f66.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.94c4c4e8.css",
+    "static/js/main.39358f66.js"
+  ]
+}
