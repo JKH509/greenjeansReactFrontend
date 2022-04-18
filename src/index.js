@@ -10,12 +10,12 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Provider store={store}>
       <Router>
       <App />
       </Router>
-    </Provider>
-  </React.StrictMode>,
+    </Provider>,
+  // </React.StrictMode>,
   document.getElementById('root')
 );

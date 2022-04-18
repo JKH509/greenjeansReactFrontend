@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router';
 // import { Link } from 'react-router-dom';
 
 import { Constants } from '../../../utilities/Constants'
+import ResponsiveSideNav from '../dashboard/ResponsiveSideNav';
 
 const AdminEditCategory = () => {
 
@@ -28,7 +29,6 @@ const AdminEditCategory = () => {
 
 
   const updateHandler = async (e) => {
-
     e.preventDefault()
     // update by put request
     const data = {
@@ -38,12 +38,14 @@ const AdminEditCategory = () => {
     }
   
     await axios.put(`${Constants.url.API_EDIT_CATEGORY_BY_ID}/${category_id}`, data)
-    navigate(`/admin/category/${category_id}`)
+    navigate(`/dashboard/admin/category/${category_id}`)
   }
 
 
   return (
-    <form onSubmit={updateHandler} className='container'>
+    <>
+    <ResponsiveSideNav dashboardContent={
+      <form onSubmit={updateHandler} className='container'>
     <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
       <div className="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
         <div>
@@ -138,6 +140,9 @@ const AdminEditCategory = () => {
       </div>
     </div>
   </form>
+    } />
+    </>
+    
   )
 }
 

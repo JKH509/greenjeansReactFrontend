@@ -81,10 +81,10 @@ const AdminAddCustomerPage = () => {
 
   return (
     
-    <div className="container">
+    <div className="">
       {/* <form className="space-y-8 divide-y divide-gray-200 "> */}
       <form
-      className="space-y-8 divide-y divide-gray-200 container"
+      className="space-y-8 divide-y divide-gray-200 "
       onSubmit={addCustomer}
       method="POST"
       // action="/profile-upload-single"

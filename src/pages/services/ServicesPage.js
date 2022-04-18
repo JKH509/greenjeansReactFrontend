@@ -12,7 +12,8 @@ const ServicesPage = ( ) => {
 
   useEffect(() => {
     async function fetchData() {
-      const request = await axios.get('https://node.greenjeans509.com/api/services/list')
+      // const request = await axios.get('http://localhost:5001/api/services/list')
+      const request = await axios.get('http://localhost:5001/api/categories/list')
       setServices(request.data)
       return request;
     }

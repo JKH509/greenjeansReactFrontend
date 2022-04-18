@@ -2,6 +2,7 @@ import React, {useState } from 'react'
 import axios from 'axios'
 import { Constants } from '../../../utilities/Constants'
 import { useNavigate } from 'react-router'
+import ResponsiveSideNav from '../dashboard/ResponsiveSideNav'
 
 const AdminAddCategory = () => {
   let navigate = useNavigate()
@@ -15,7 +16,6 @@ const AdminAddCategory = () => {
   
   const addCategory = async (e) => {
     e.preventDefault();
-
     const formData = new FormData();
     formData.append("category_name", categoryName);
     formData.append("category_description", categoryDescription);
@@ -23,12 +23,14 @@ const AdminAddCategory = () => {
     formData.append("category_image", category_image);
 
     axios.post(`${Constants.url.API_ADD_CATEGORY}`, formData);
-    navigate("/admin/category")
+    navigate("/dashboard/admin/categories")
   };
 
 
   return (
-    <form
+    <>
+    <ResponsiveSideNav dashboardContent={
+      <form
       className="space-y-8 divide-y divide-gray-200 container"
       onSubmit={addCategory}
       method="POST"
@@ -128,9 +130,11 @@ const AdminAddCategory = () => {
 
           </div>
         </div>
-        
       </div>
     </form>
+    } />
+    </>
+    
   )
 }
 

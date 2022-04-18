@@ -8,31 +8,35 @@ import BackButtons from '../components/buttons/BackButtons';
 
 
 const LoginPage = () => {
+    const { authState, setAuthState } = useContext(AuthContext)
  
     const [ userPassword, setUserPassword ] = useState('')
     const [ errors, setErrors ] = useState('')
     const [ userName, setUserName ] = useState('')
   
-    const { setAuthState } = useContext(AuthContext)
+    
 
     let navigate = useNavigate();
 
-  const login = async (e) => {
-    e.preventDefault();
+    const login = async (e) => {
+      e.preventDefault();
 
-    const data = {userName, userPassword}
+      const data = { userName, userPassword };
       axios.post(`${Constants.url.API_GET_LOGIN}`, data).then((response) => {
-      if(response.data.error ){
-        setErrors(response.data.error)
-      } else {
-        setErrors("")
-        sessionStorage.setItem("accessToken", response.data.token)
-        setAuthState({userName: response.data.userName, id: response.data.id, status:true})
-        navigate('/')
-      };
-    });
-
-  }
+        if (response.data.error) {
+          setErrors(response.data.error);
+        } else {
+          setErrors("");
+          sessionStorage.setItem("accessToken", response.data.token);
+          setAuthState({
+            userName: response.data.userName,
+            id: response.data.id,
+            status: true,
+          });
+          navigate("/");
+        }
+      });
+    };
 
 
 

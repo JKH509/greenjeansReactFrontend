@@ -70,9 +70,9 @@ const AdminAddNewEmployeePage = () => {
   
 
   return (
-    <div className="container">
+    <div className="">
      <form
-      className="space-y-8 divide-y divide-gray-200 container"
+      className="space-y-8 divide-y divide-gray-200 "
       onSubmit={addNewEmployee}
       method="POST"
       // action="/profile-upload-single"

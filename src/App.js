@@ -28,7 +28,7 @@ import EmployeeProfile from './pages/profiles/EmployeeProfile';
 // import Snow from './pages/services/snow/Snow';
 import AdminCategoriesPage from './pages/admin/category_data/AdminCategoriesPage';
 import AdminAddCategory from './pages/admin/category_data/AdminAddCategory';
-import AdminEditCategory from './pages/admin/category_data/AdminEditCategory';
+// import AdminEditCategory from './pages/admin/category_data/AdminEditCategory';
 import AdminCategoryPage from './pages/admin/category_data/AdminCategoryPage';
 import CategoryPage from './pages/services/category/CategoryPage';
 import LoginPage from './LoginSignup/LoginPage';
@@ -42,6 +42,12 @@ import SelfBidPage from './pages/selfBid/SelfBidPage';
 import About from './pages/about/About';
 import NotFound from './NotFound';
 import ContactPage from './pages/contact/ContactPage';
+
+// import WorkOrderRequest from './pages/admin/customer_data/workorders/WorkOrderRequest';
+import WorkOrderForm from './components/forms/WorkOrderForm';
+import AdminEditCategory from './pages/admin/category_data/AdminEditCategory';
+import Testing from './pages/admin/admin_components/drop-down-list/Testing';
+// import AllOpenOrdersThatNeedSceduled from './pages/admin/customer_data/workorders/AllOpenOrdersThatNeedSceduled';
 // import UnderConstruction from './pages/UnderConstruction';
 
 
@@ -82,19 +88,34 @@ useEffect(() => {
       <AuthContext.Provider value={{ authState, setAuthState }}>
 
         {/* As long as the pathname is not equal to the pathnames below, then display the header, else the header doesn't display */}
-      {location.pathname === "/login" || location.pathname === "/sign-up" || location.pathname === "/dashboard" ? (
-          ""
-        ) : (
-          <Header />
-        )}
+      {location.pathname === "/login" || location.pathname === "/sign-up" ||
+       location.pathname === "/dashboard" || location.pathname === "/dashboard/clients" || 
+       location.pathname === "/dashboard/create-client" || location.pathname === "/dashboard/employees" ||
+       location.pathname === "/dashboard/admin/create/employee" || location.pathname === "/dashboard/admin/categories" ||
+       location.pathname === "/dashboard/admin/create/category" || location.pathname === "/dashboard/admin/edit/category/:category_id" ||
+       location.pathname === "/dashboard/admin/category/1" || location.pathname === "/dashboard/admin/category/:category_id"
+       ? ( "" ) : ( <Header /> )}
+
+
+
+        
 
       <Routes>
 
-{/* visitor facing */}
+      <Route path="/test" element={<Testing />} />
+
+
+
+      {/* Login or register pages, will eventually check by client and employee ID */}
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+
+      {/* visitor facing */}
         <Route path="/" element={<HomePage />} />
          {/* <Route path="/categories" element={<CategoryPage />} /> */}
-         <Route path="/about" element={<About />} />
+        <Route path="/about" element={<About />} />
         <Route path="/services" element={<CategoryPage />} />
+
         {/* <Route path="/services/:service_id" element={<CategoryPage />} /> */}
         {/* <Route path="/lawn" element={<Lawns />} /> */}
         <Route path="/lawns" element={<ComingSoon /> } />
@@ -105,12 +126,10 @@ useEffect(() => {
         <Route path="/estimates" element={<SelfBidPage />} />
         <Route path='/contact-us' element={<ContactPage />} />
 
-        {/* Login or register pages, will eventually check by client and employee ID */}
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
+        
         
 
-{/* client and employee profiles. Will eventually sort by DB id numbers with employees as even and clients odd with admin having 1-10 */}
+      {/* client and employee profiles. Will eventually sort by DB id numbers with employees as even and clients odd with admin having 1-10 */}
         {authState.id % 2 || authState.id === 4  ? 
         <>
           <Route path="/profile/:username" element={<EmployeeProfile />}/> 
@@ -122,75 +141,73 @@ useEffect(() => {
         /> }
         
      
-
-
-
-       
-
-
-
 {/* profiles */}
         {/* <Route path="/profile" element={<EmployeeProfile />} /> */}
 
 
 
 
-{/* admin facing */}
+{/* ADMIN Access */}
 
 {authState.id === 1 || authState.id === 4 ? <Route path="/dashboard" element={<Dashboard />} /> : <Route path="/" element={<HomePage />} />   }
+{/* {authState.id === 1 || authState.id === 4 ? <Route path="/dashboard/*" element={<Dashboard />} /> : <Route path="/" element={<HomePage />} />   } */}
 {/* {authState.id === 4 &&  <Route path="/dashboard" element={<Dashboard />} />  } */}
+
+{/* Main dashboard  */}
+  <Route path="/dashboard" element={<Dashboard />} />
+
+{/* Testing Routes  */}
+  <Route path="/dashboard/four" element={<Dashboard />} />
+  <Route path="/dashboard/five" element={<Dashboard />} />
+  <Route path="/dashboard/six" element={<Dashboard />} />
+  <Route path="/dashboard/toggle" element={<Dashboard />} />
+  <Route path="/dashboard/invoice" element={<Dashboard />} />
+  <Route path="/dashboard/checkbox" element={<Dashboard />} />
+  <Route path="/dashboard/profit-loss" element={<Dashboard />} />
+
+{/* Client Dashboards  */}
+  <Route path="/dashboard/clients" element={<Dashboard />} />
+  <Route path="/dashboard/create-client" element={<Dashboard />} />
+
+  <Route path="/admin/edit/customer/:customer_id" element={<AdminEditCustomerPage />} />
+  <Route path="/admin/customer/:customer_id" element={<AdminCustomerPage />} />
+
+  <Route path="/admin/customer/:customer_id/create-work-order/:customer_id" element={<WorkOrderForm />} />
+
+{/* Invoice Dashboards  */}
+  <Route path="/admin/customer/invoice/:customer_id" element={<AdminCustomerInvoicePage />} />
+
+{/* Employee Dashboards  */}
+  <Route path="/dashboard/employees" element={<Dashboard />} />
+  <Route path="/dashboard/admin/create/employee" element={<Dashboard />} />
+  <Route path="/admin/employees" element={<AdminEmployeesPage />} />
+  <Route path="/admin/employee/:employee_id" element={<AdminEmployeePage />} />
+
+  <Route path="/admin/edit/employee/:employee_id" element={<AdminEditEmployeePage />} />
+
+{/* Order Dashboards  */}
+  <Route path="/dashboard/all-open-orders" element={<Dashboard />} />
         
-
-{/* customers */}
-{/* {isAdmin === true ? <Route path="/admin/customers" element={<AdminCustomersPage />} /> : '' } */}
- <Route path="/admin/customers" element={<AdminCustomersPage />} />
-        
-
-        {/* <Route path='/test' element={<AdminTest />} /> */}
-
-        <Route
-          path="/admin/customer/:customer_id"
-          element={<AdminCustomerPage />}
-        />
-        <Route
-          path="/admin/create/customer"
-          element={<AdminAddCustomerPage />}
-        />
-        <Route
-          path="/admin/edit/customer/:customer_id"
-          element={<AdminEditCustomerPage />}
-        />
-        <Route
-          path="/admin/customer/invoice/:customer_id"
-          element={<AdminCustomerInvoicePage />}
-        />
-
-{/* employees */}
-        <Route path="/admin/employees" element={<AdminEmployeesPage />} />
-        <Route path="/admin/employee/:employee_id" element={<AdminEmployeePage />} />
-        <Route
-          path="/admin/create/employee"
-          element={<AdminAddNewEmployeePage />}
-        />
-        <Route
-          path="/admin/edit/employee/:employee_id"
-          element={<AdminEditEmployeePage />}
-        />
-
-{/* services */}
-        <Route path="/admin/services" element={<AdminServicesPage />} />
-        <Route path="/admin/service/:service_id" element={<AdminServicePage />} />
-        <Route path="/admin/create/service" element={<AdminAddServicePage />} />
+{/* Service Dashboards */}
+        <Route path="/dashboard/admin/services" element={<AdminServicesPage />} />
+        <Route path="/dashboard/admin/service/:service_id" element={<AdminServicePage />} />
+        <Route path="/dashboard/admin/create/service" element={<AdminAddServicePage />} />
         <Route
           path="/admin/edit/service/:service_id"
           element={<AdminEditServicePage />}
         />
 
-{/* categories */}
-        <Route path="/admin/categories" element={<AdminCategoriesPage />} />
-        <Route path="/admin/category/:category_id" element={<AdminCategoryPage />} />
-        <Route path="/admin/create/category" element={<AdminAddCategory />} />
-        <Route path="/admin/edit/category/:category_id" element={<AdminEditCategory />} />
+{/* Category Dashboards */}
+        <Route path="/dashboard/admin/categories" element={<AdminCategoriesPage />} />
+        <Route path="/dashboard/admin/create/category" element={<AdminAddCategory />} />
+        <Route path="/dashboard/admin/category/:category_id" element={<AdminCategoryPage />} />
+        <Route path="/dashboard/admin/edit/category/:category_id" element={<AdminEditCategory />} />
+
+        
+        
+        
+
+
 
 {/* 404 error page  */}
         <Route path="*" element={<NotFound />} />

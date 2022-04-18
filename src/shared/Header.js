@@ -242,23 +242,12 @@ const Header = () => {
               Estimates
             </Link>
 
-            <Link
+            {/* <Link
               to="/"
               className="text-base font-medium text-gray-500 hover:text-gray-900"
             >
               Clients
-            </Link>
-
-            {authState.authState.id === 1 || authState.authState.id === 4 ? (
-              <Link
-                to="/dashboard"
-                className="text-base font-medium text-gray-500 hover:text-gray-900"
-              >
-                dashboard
-              </Link>
-            ) : (
-              <></>
-            )}
+            </Link> */}
 
             <Popover className="relative">
               {({ open }) => (
@@ -270,7 +259,7 @@ const Header = () => {
                     )}
                   >
                     {/* ONLY display if user is logged in as ADMIN */}
-                    {authState.authState.id !== 1 &&
+                    {/* {authState.authState.id !== 1 &&
                     authState.authState.id !== 4 ? (
                       // <span>More</span>
                       ""
@@ -285,7 +274,7 @@ const Header = () => {
                           aria-hidden="true"
                         />
                       </>
-                    )}
+                    )} */}
                   </Popover.Button>
 
                   <Transition
@@ -306,7 +295,7 @@ const Header = () => {
                             {/* <Link key={item.name} href={item.href} className="-m-3 p-3 block rounded-md hover:bg-gray-50"> */}
 
                             <>
-                              <Link
+                              {/* <Link
                                 to="/admin/customers"
                                 className="-m-3 p-2 block rounded-md hover:bg-gray-50"
                               >
@@ -372,7 +361,7 @@ const Header = () => {
                                 <p className="text-base font-medium text-gray-900">
                                   Add Category
                                 </p>
-                              </Link>
+                              </Link> */}
                             </>
                           </div>
                         </div>
@@ -406,6 +395,13 @@ const Header = () => {
               </>
             ) : (
               <>
+               {authState.authState.id === 1 || authState.authState.id === 4 ? <Link
+                    to='/dashboard'
+                    className="text-base font-medium text-gray-500 hover:text-gray-900 mr-3"
+                  >
+                    Dashboard
+                  </Link> : ""}
+
                 {location.pathname === "/" && (
                   <Link
                     to={`/profile/${authState.authState.userName}`}
@@ -483,12 +479,6 @@ const Header = () => {
                   Estimates
                 </Link>
 
-                <Link
-                  to="/"
-                  className="text-base font-medium text-gray-500 hover:text-gray-900"
-                >
-                  Clients
-                </Link>
 
                 <Link
                   to="/"
